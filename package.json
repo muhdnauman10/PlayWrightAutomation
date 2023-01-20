@@ -1,0 +1,15 @@
+{
+  "name": "basicjs",
+  "version": "1.0.0",
+  "description": "learning purpose ",
+  "main": "BasicJS.js",
+  "scripts": {},
+  "keywords": [
+    "basic"
+  ],
+  "author": "Faizan",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.29.1"
+  }
+}
