@@ -223,6 +223,7 @@ test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
   await page.locator("#ui-id-7").hover();
   await page.locator("#ui-id-28").click();
   await page.locator(".message.info.empty").selectText();
+
   //const product_Text = await page
   //.locator(
   // ".cf-tweet-this cf-tt-target cf-tt-element-attached-bottom cf-tt-element-attached-center cf-tt-target-attached-top cf-tt-target-attached-center"
