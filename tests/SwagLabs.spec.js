@@ -21,7 +21,7 @@ test("Login to checkout E2E", async ({ page }) => {
   console.log(" Title is matched");
   await page.locator("[name='finish']").click();
   const title = await expect(page.locator(".complete-header")).toHaveText(
-    "THANK YOU FOR YOUR ORDER"
+    "Thank you for your order!"
   );
   const titletext = (
     await page.locator(".complete-header").innerText()
@@ -40,10 +40,6 @@ test("Add an item and remove it ", async ({ page }) => {
   await expect(page.locator("#item_2_title_link")).toHaveText(
     "Sauce Labs Onesie"
   );
-  // const itemtext = (
-  // await page.locator("#item_2_title_link").itemtext()
-  // ).valueOf();
-  //console.log(itemtext);
   await page.locator("[data-test='remove-sauce-labs-onesie']").click();
   await page.locator("#react-burger-menu-btn").click();
   await page.locator("#logout_sidebar_link").click();

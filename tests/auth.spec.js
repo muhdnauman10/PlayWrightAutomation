@@ -1,8 +1,6 @@
 import { Page, expect, test } from "@playwright/test";
 
 export class Login {
-  //static EMAIL = "standard_user";
-  //static PASSWORD = "secret_sauce";
   constructor(page) {
     this.page = page;
   }

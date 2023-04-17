@@ -15,8 +15,8 @@ export class Sign_in {
     const user_email = this.page.locator("#email");
     const password = this.page.locator("//input[@title='Password']");
     const SignIN = this.page.locator("(//button[@id='send2'])[1]");
-    await user_email.type("munau@ciklum.com");
-    await password.fill("Ciklum123#");
+    await user_email.type("jhon23@gmail.com");
+    await password.fill("test123#");
     await SignIN.click();
   }
 }
@@ -36,9 +36,10 @@ export class Sign_out {
     //const logout = this.page.locator(
     //   "(//a[@href='https://magento.softwaretestingboard.com/customer/account/logout/'])[1]"
     // );
-    const LogOut = this.page.locator("text= Sign Out ").first();
-    await expect(LogOut).toBeVisible();
 
+    const LogOut = this.page.locator("text= Sign Out ").first();
+    await expect(LogOut).toBeVisible({ timeout: 10000 });
+    await LogOut.waitFor();
     await LogOut.click();
   }
 }

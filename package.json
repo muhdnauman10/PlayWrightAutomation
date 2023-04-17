@@ -3,13 +3,21 @@
   "version": "1.0.0",
   "description": "learning purpose ",
   "main": "BasicJS.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test --headed",
+    "test:reporter": "playwright test --headed --reporter=allure-playwright, html",
+    "allure-report": "npx allure generate ./allure-results && allure open "
+  },
   "keywords": [
     "basic"
   ],
-  "author": "Faizan",
+  "author": "Nauman",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.29.1"
+    "@playwright/test": "^1.30.0",
+    "allure-playwright": "^2.0.0-beta.26"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.21.0"
   }
 }

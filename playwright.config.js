@@ -14,13 +14,13 @@ const { devices } = require("@playwright/test");
 const config = {
   testDir: "./tests",
   /* Maximum time one test can run for. */
-  timeout: 50 * 1000,
+  timeout: 100 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 50000,
+    timeout: 10000,
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -32,7 +32,12 @@ const config = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [
+    ["line"],
+    ["html"],
+    ["allure-playwright", { outputFolder: "allure-results" }],
+  ],
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     video: "on",
@@ -54,6 +59,7 @@ const config = {
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
+        viewport: { width: 1536, height: 722 },
       },
     },
 

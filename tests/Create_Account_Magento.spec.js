@@ -2,16 +2,24 @@ const { test, expect } = require("@playwright/test");
 const { Sign_in, Sign_out } = require("./sign_in_spec");
 
 test("Create New Account", async ({ page }) => {
+  //navigate to the website
   page.goto("https://magento.softwaretestingboard.com/");
+  // click on the create an account link
   await page.getByRole("link", { name: "Create an Account" }).click();
+  //Fill user name field
   await page.locator("xpath=//input[@id='firstname']").type("John");
   await page.locator("#lastname").fill("Doe");
+  //check the subscribed checkbox
   await page.locator("[name='is_subscribed']").click();
+  //randomly generate the email id
   await page
     .locator("xpath=//input[@id='email_address']")
     .fill("john_" + getRndInteger(0, 101) + "@mailinator.com");
-  await page.locator("xpath=//input[@id='password']").type("Ciklum123#");
-  await page.locator("#password-confirmation").fill("Ciklum123#");
+  //type password
+  await page.locator("xpath=//input[@id='password']").type("Test123#");
+  //re confirm password
+  await page.locator("#password-confirmation").fill("Test123#");
+  //click on create an account button
   await page.getByRole("button", { name: "Create an Account" }).click();
 });
 
@@ -131,16 +139,17 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   // Add Postal code
   //await page.locator("//input[@name='postcode']").fill("08873");
   // Add Country
-  // await page.locator("//select[@name='country_id']").selectOption("Pakistan");
+  //await page.locator("//select[@name='country_id']").selectOption("Pakistan");
   // Add phone number
-  // await page.locator("//input[@name='telephone']").type("+92354575100");
+  //await page.locator("//input[@name='telephone']").type("+92354575100");
   // Check radio button
   await page.locator("input[value='flatrate_flatrate']").check();
   //click on next button
   await page.locator("//button[@data-role='opc-continue']").click();
   //click on place order button
   const locator = page.locator("//button[@title='Place Order']");
-  await expect(locator).toBeVisible();
+  await page.waitForSelector("//button[@title='Place Order']");
+  //await expect(locator).toBeVisible();
   await locator.waitFor();
   await locator.click();
   //print the thankyou message in terminal
@@ -212,7 +221,6 @@ test("Search an item using search bar", async ({ page }) => {
   await page.locator("xpath=//a[@title='Next']").nth(1).click();
   await page.waitForLoadState("networkidle");
   //change page size
-
   await page.locator("#limiter").nth(1).selectOption("24");
 });
 
@@ -236,4 +244,25 @@ test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
   // .innerText()
   //   .valueOf();
   //console(product_Text);
+});
+
+test("Click on Gear tab and sort by price and select an item ", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  await Signin.doSignin();
+  await page.locator("#ui-id-6").hover();
+  await page.locator("#ui-id-25").click();
+  await page.waitForSelector("#sorter");
+  await page.selectOption("#sorter", "price");
+  //await page.locator("#sorter").first().click();
+  //click on first item
+  await page.locator("a.product-item-link").first().click();
+  //await page.locator("//span[@data-ui-id='page-title-wrapper']").selectText();
+  //await page.locator("#product-addtocart-button").click();
+  //await page.locator("#tab-label-additional-title").click();
+  //const heading = await page.locator("(//td[@class='col data'])[1]");
+  // const headingText = heading.textContent();
+  //console.log(headingText);
+  //await page.locator("(//span[@class='counter qty'])[1]").click();
 });
