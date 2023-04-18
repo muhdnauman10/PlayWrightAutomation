@@ -246,10 +246,11 @@ test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
   //console(product_Text);
 });
 
-test("Click on Gear tab and sort by price and select an item ", async ({
+test.only("Click on Gear tab and sort by price and select an item ", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
   await Signin.doSignin();
   await page.locator("#ui-id-6").hover();
   await page.locator("#ui-id-25").click();
@@ -258,11 +259,65 @@ test("Click on Gear tab and sort by price and select an item ", async ({
   //await page.locator("#sorter").first().click();
   //click on first item
   await page.locator("a.product-item-link").first().click();
-  //await page.locator("//span[@data-ui-id='page-title-wrapper']").selectText();
-  //await page.locator("#product-addtocart-button").click();
-  //await page.locator("#tab-label-additional-title").click();
-  //const heading = await page.locator("(//td[@class='col data'])[1]");
-  // const headingText = heading.textContent();
-  //console.log(headingText);
-  //await page.locator("(//span[@class='counter qty'])[1]").click();
+  //select product title
+  await page.locator("//span[@data-ui-id='page-title-wrapper']").selectText();
+  //click add to cart button
+  await page.locator("#product-addtocart-button").click();
+  await page.locator("#tab-label-additional-title").click();
+
+  //click on cart icon
+  await page.locator("//a[@class='action showcart']").click();
+  // await page.locator("//span[@class='counter qty'])[1]").click();
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
+});
+
+test("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  // hover on Mens tab
+  await page.locator("#ui-id-5").hover();
+  //hover on Bottom
+  await page.locator("#ui-id-18").hover();
+  //click on Pants tab
+  await page.locator("#ui-id-23").click();
+  //change to List from Grid Style
+  await page.locator("#mode-list").first().click();
+  //click on 2nd page
+  await page.locator("xpath=//a[@title='Next']").nth(1).click();
+  //click on product title
+  await page.locator(".product-item-link").nth(1).click();
+  //select size
+  await page.locator("#option-label-size-143-item-175").click();
+  //select color
+  await page.locator("#option-label-color-93-item-49").click();
+  //click add to cart
+  await page.locator(" //button[@title='Add to Cart']").click();
+  //click on cart icon
+  await page.locator("//a[@class='action showcart']").click();
+  //click on proceed to checkout
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
 });
