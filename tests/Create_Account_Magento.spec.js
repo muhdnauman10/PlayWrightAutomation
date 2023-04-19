@@ -246,7 +246,7 @@ test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
   //console(product_Text);
 });
 
-test.only("Click on Gear tab and sort by price and select an item ", async ({
+test("Click on Gear tab and sort by price and select an item ", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -319,5 +319,85 @@ test("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->
   await locator.waitFor();
   await locator.click();
   //click signout
+  await Signout.doSignout();
+});
+
+test("Go to “Sale” tab and select on Shorts under Men’s deal from left navigation hyperlink", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //click on sale tab
+  await page.locator("#ui-id-8").click();
+  //click on shorts from left navigation under Mens deal
+
+  await page
+    .locator(
+      "(//a[@href='https://magento.softwaretestingboard.com/men/bottoms-men/shorts-men.html'])[2]"
+    )
+    .click();
+  await page.locator("a.product-item-link").nth(0).hover();
+  //select size
+  await page.locator("#option-label-size-143-item-175").first().click();
+  //select color
+  await page.locator("#option-label-color-93-item-49").first().click();
+  //click on the Add to cart button
+  await page.locator("//button[@title='Add to Cart']").first().click();
+  //click on cart icon
+  await page.locator("//a[@class='action showcart']").click();
+  //proceed to checkout
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  // //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  // //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  // //click signout
+  await Signout.doSignout();
+});
+
+test.only("Click on Gear tab and sort by product and select an item , then sort by position and select item ", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  await page.locator("#ui-id-6").hover();
+  //click on watches
+  await page.locator("#ui-id-27").click();
+  await page.waitForSelector("#sorter");
+  await page.waitForLoadState("networkidle");
+  await page.selectOption("#sorter", "Product Name");
+  // change to List Mode from Grid
+  await page.locator("#mode-list").first().click();
+  //click on first item
+  //await page.locator("a.product-item-link").first().click();
+  //increase qty
+  //await page.locator("#qty").fill("4");
+  //click on the Add to cart button
+  await page.locator("//button[@title='Add to Cart']").first().click();
+  //Sort by Position
+  await page.waitForSelector("#sorter");
+  //await page.waitForLoadState("networkidle");
+  await page.selectOption("#sorter", "Position");
+  //add another item to add to cart
+  await page.locator("(//button[@title='Add to Cart'])[2]").click();
+  //click on cart icon
+  await page.locator("//a[@class='action showcart']").click();
+  //proceed to checkout
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  // //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  // //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  // //click signout
   await Signout.doSignout();
 });
