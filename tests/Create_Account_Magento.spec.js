@@ -282,7 +282,7 @@ test("Click on Gear tab and sort by price and select an item ", async ({
   await Signout.doSignout();
 });
 
-test("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
+test.only("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -297,7 +297,9 @@ test("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->
   //change to List from Grid Style
   await page.locator("#mode-list").first().click();
   //click on 2nd page
-  await page.locator("xpath=//a[@title='Next']").nth(1).click();
+  await waitForSelector("(//li[@class='item pages-item-next'])[1]");
+  await page.locator("(//li[@class='item pages-item-next'])[1]").click();
+  //await page.locator("xpath=//a[@title='Next']").nth(1).click();
   //click on product title
   await page.locator(".product-item-link").nth(1).click();
   //select size
@@ -360,7 +362,7 @@ test("Go to “Sale” tab and select on Shorts under Men’s deal from left nav
   await Signout.doSignout();
 });
 
-test.only("Click on Gear tab and sort by product and select an item , then sort by position and select item ", async ({
+test("Click on Gear tab and sort by product and select an item , then sort by position and select item ", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -400,4 +402,199 @@ test.only("Click on Gear tab and sort by product and select an item , then sort 
   await locator.click();
   // //click signout
   await Signout.doSignout();
+});
+
+test("Women tabs>Tops>Jackets,apply filter and select an item", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //hover on women tab
+  await page.locator("//a[@id='ui-id-4']").hover();
+  //hower on tops
+  await page.locator("#ui-id-9").hover();
+  //click on jackets
+  await page.locator("#ui-id-11").click();
+  //click on style filter
+  await page.locator("text='Style'").click();
+  //click on jacket from filter option
+  await page.locator("text='Jacket'").click();
+  //select an item
+  await page.locator("a.product-item-link").nth(0).click();
+  //select jacket size
+  await page.locator("#option-label-size-143-item-166").click();
+  //select color
+  await page.locator("#option-label-color-93-item-50").click();
+  //increase qty
+  await page.locator("#qty").fill("3");
+  //click add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //click on cart icon
+  await page.locator("//a[@class='action showcart']").click();
+  //proceed to checkout
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  // //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  // //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  // //click signout
+  await Signout.doSignout();
+});
+
+test("Add an item to cart and delete it", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+
+  await page.locator("#ui-id-5").hover();
+  await page.locator("#ui-id-17").hover();
+  await page.locator("#ui-id-19").click();
+
+  //click on ist jacket
+  await page
+    .locator("//div[@id='option-label-size-143-item-166']")
+    .nth(0)
+    .click();
+
+  //select jacket color
+  await page.locator("#option-label-color-93-item-49").nth(0).click();
+  //click on the Add to cart button
+  await page.locator("//button[@title='Add to Cart']").first().click();
+  //click on cart icon
+  await page.locator("//a[@class='action showcart']").click();
+  //delete item
+  await page.locator(".action.delete").click();
+  // //click signout
+  await Signout.doSignout();
+});
+
+test("If item price is less than 70$ increase the qty to 4", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //hover on Mens tab
+  await page.locator("#ui-id-5").hover();
+  //hover on Tops
+  await page.locator("#ui-id-17").hover();
+  //click on hoodies & jackets
+  await page.locator("#ui-id-20").click();
+  //click on jacket less than $70
+  await page.locator("a.product-item-link").nth(1).click();
+
+  const price = await page.$eval("#product-price-238", (el) => el.textContent);
+  // converting string to floating
+  //parseFloat and replace both are built-in javascript methods
+  const numericPrice = parseFloat(price.replace("$", ""));
+
+  if (numericPrice < 70) {
+    await page.locator("#qty").click();
+    await page.locator("#qty").fill("4");
+    // //click signout
+    await Signout.doSignout();
+  }
+});
+
+test("Click Contact us and fill the form", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //click on contact us link
+  await page.locator("text='Contact Us'").click();
+  //fill the name field
+  //await page.locator("#name").type("John Doe");
+  //enter email
+  //await page.locator("#email").type("john23@gmail.com");
+  //enter phone#
+  await page.locator("#telephone").fill("+9234152352");
+  //add a comment
+  await page.locator("#comment").fill("This is a test comment");
+  //click submit button
+  await page.locator("//button[@title='Submit']").click();
+  // //click signout
+  await Signout.doSignout();
+});
+
+test("Subscribe email", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //to check if signin is successful
+  await expect(page.locator("(//span[@class='logged-in'])[1]")).toBeVisible();
+  await expect(page.locator("(//span[@class='logged-in'])[1]")).toHaveText(
+    "Welcome, John Doe!"
+  );
+
+  // Enter email in the email address field
+  //randomly generate the email id
+  await page
+    .locator("#newsletter")
+    .fill("john_" + getRndInteger(0, 101) + "@mailinator.com");
+  //click on subscribe button
+  await page.locator("//button[@title='Subscribe']").click();
+  //await page.waitForSelector("(//div[@class='messages'])[1]'");
+  //validate the subscribe email
+  await expect(page.locator("(//div[@class='messages'])[1]")).toHaveText(
+    "Thank you for your subscription."
+  );
+  // //click signout
+  await Signout.doSignout();
+});
+
+test("if the item price>70 delete the item fromc cart", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //to check if signin is successful
+  await expect(page.locator("(//span[@class='logged-in'])[1]")).toBeVisible();
+  await expect(page.locator("(//span[@class='logged-in'])[1]")).toHaveText(
+    "Welcome, John Doe!"
+  );
+  // hover on Men's tab
+  await page.locator("#ui-id-5").hover();
+  //hover on Top tab
+  await page.locator("#ui-id-17").hover();
+  //click on jackets tab
+  await page.locator("#ui-id-19").click();
+  //sort by price
+  await page.waitForSelector("#sorter");
+  await page.selectOption("#sorter", "price");
+  //click on descending order
+  await page.locator("(//a[@title='Set Descending Direction'])[1]").click();
+  //click on ist product item
+  await page.locator(".product-item-link").first().click();
+  //select size
+  await page.locator("#option-label-size-143-item-166").click();
+  //select color
+  await page.locator("#option-label-color-93-item-50").click();
+  //click add to cart
+  await page.locator("#product-addtocart-button").click();
+  //click on cart icon
+  //await page.locator("(//span[@class='counter qty'])[1]").click();
+  await page.locator("//a[@class='action showcart']").click();
+  //
+  // await page.locator("(//span[@class='price'])[2])");
+  await expect(page.locator("(//span[@class='price'])[2]")).toHaveText(
+    "$99.00"
+  );
+
+  //const item_price = await page.locator(".price");
+  //const product_price = await page.locator("//div[@data-role='priceBox']");
+  //const product_length = await page.locator("//div[@data-role='priceBox']").count();
+  //await expect(product_price).toHaveCount(11);
+
+  // const product_length = product_price.count();
+
+  //console.log(product_length);
+
+  //    for (let i=0; product_price > 70; product_price++) {
+
+  //  }
+  //   }
 });
