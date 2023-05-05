@@ -27,7 +27,7 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-test.only("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
+test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -230,23 +230,11 @@ test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
   await Signin.doSignin();
   await page.locator("#ui-id-7").hover();
   await page.locator("#ui-id-28").click();
+  //select text
   await page.locator(".message.info.empty").selectText();
-
-  //const product_Text = await page
-  //.locator(
-  // ".cf-tweet-this cf-tt-target cf-tt-element-attached-bottom cf-tt-element-attached-center cf-tt-target-attached-top cf-tt-target-attached-center"
-  // )
-  //.selectText();
-  //const product_Text = await page
-  // .locator(
-  //    ".cf-tweet-this cf-tt-target cf-tt-element-attached-bottom cf-tt-element-attached-center cf-tt-target-attached-top cf-tt-target-attached-center"
-  //  )
-  // .innerText()
-  //   .valueOf();
-  //console(product_Text);
 });
 
-test("Click on Gear tab and sort by price and select an item ", async ({
+test.only("Click on Gear tab and sort by price and select an item ", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -267,7 +255,7 @@ test("Click on Gear tab and sort by price and select an item ", async ({
 
   //click on cart icon
   await page.locator("//a[@class='action showcart']").click();
-  // await page.locator("//span[@class='counter qty'])[1]").click();
+
   //click on proceed to check out button
   await page.locator("#top-cart-btn-checkout").click();
   await page.waitForLoadState("networkidle");
