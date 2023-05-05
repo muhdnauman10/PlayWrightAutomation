@@ -27,7 +27,7 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
+test.only("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -123,7 +123,7 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   //click on cart icon
   //await page.locator(".counter-number").waitFor();
   //await page.locator(".counter-number").click();
-  await page.locator("(//span[@class='counter qty'])[1]").click();
+  await page.locator("(//span[@class='counter qty'])[2]").click();
   //click on proceed to checkout button
   await page.locator("#top-cart-btn-checkout").click();
 
@@ -282,7 +282,7 @@ test("Click on Gear tab and sort by price and select an item ", async ({
   await Signout.doSignout();
 });
 
-test.only("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
+test("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
