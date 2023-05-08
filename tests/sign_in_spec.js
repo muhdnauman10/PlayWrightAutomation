@@ -25,6 +25,9 @@ export class Sign_in {
     await expect(
       this.page.locator("(//span[@class='logged-in'])[1]")
     ).toHaveText("Welcome, John Doe!");
+    await expect(this.page).toHaveURL(
+      "https://magento.softwaretestingboard.com/"
+    );
   }
 }
 
