@@ -27,6 +27,21 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+test.only("Verify Forgot password screen and navigate back", async ({
+  page,
+}) => {
+  // go to the mentioned site
+  await page.goto("https://magento.softwaretestingboard.com/");
+  // click on Sign in link
+  await page.locator("text='Sign In' ").first().click();
+  //click on Forgot password link
+  await page.locator(".action.remind").click();
+  //verify text
+  await expect(page.locator(".base")).toHaveText("Forgot Your Password?");
+  //select text
+  await page.locator(".base").selectText();
+});
+
 test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   page,
 }) => {
@@ -234,7 +249,7 @@ test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
   await page.locator(".message.info.empty").selectText();
 });
 
-test.only("Click on Gear tab and sort by price and select an item ", async ({
+test("Click on Gear tab and sort by price and select an item ", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
