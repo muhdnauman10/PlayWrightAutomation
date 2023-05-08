@@ -27,9 +27,7 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-test.only("Verify Forgot password screen and navigate back", async ({
-  page,
-}) => {
+test("Verify Forgot password screen and navigate back", async ({ page }) => {
   // go to the mentioned site
   await page.goto("https://magento.softwaretestingboard.com/");
   // click on Sign in link
@@ -239,7 +237,9 @@ test("Search an item using search bar", async ({ page }) => {
   await page.locator("#limiter").nth(1).selectOption("24");
 });
 
-test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
+test.only("Click on Training @smoke > Video Download Menu", async ({
+  page,
+}) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
