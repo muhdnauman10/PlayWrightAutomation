@@ -38,7 +38,7 @@ test("Verify Email and password title", async ({ page }) => {
   await expect(pass_label).toHaveText("Password");
 });
 
-test.only("Verify Login with Invalid credentials", async ({ page }) => {
+test("Verify Login with Invalid credentials", async ({ page }) => {
   // go to the mentioned site
   await page.goto("https://magento.softwaretestingboard.com/");
   // click on Sign in link
@@ -243,9 +243,16 @@ test("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
   await page.locator("xpath=//button[@title='Add to Cart']").nth(0).click();
 });
 
-test("Search an item using search bar", async ({ page }) => {
+test.only("Search an item using search bar and change page size", async ({
+  page,
+}) => {
   //goto
-  await page.goto("https://magento.softwaretestingboard.com/");
+  //await page.goto("https://magento.softwaretestingboard.com/");
+
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+
   // type the input in search field
   await page.locator("#search").type("Gym Jacket");
   // click on search icon(the magnifying glass)
@@ -263,6 +270,7 @@ test("Search an item using search bar", async ({ page }) => {
   await page.waitForLoadState("networkidle");
   //change page size
   await page.locator("#limiter").nth(1).selectOption("24");
+  await Signout.doSignout();
 });
 
 test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
