@@ -38,6 +38,23 @@ test("Verify Email and password title", async ({ page }) => {
   await expect(pass_label).toHaveText("Password");
 });
 
+test.only("Verify Login with Invalid credentials", async ({ page }) => {
+  // go to the mentioned site
+  await page.goto("https://magento.softwaretestingboard.com/");
+  // click on Sign in link
+  await page.locator("text='Sign In' ").first().click();
+  const User_Email = page.locator("#email");
+  const Paswrd = page.locator("//input[@title='Password']");
+  const SignIN = page.locator("(//button[@id='send2'])[1]");
+  await User_Email.type("jhon22223@gmail.com");
+  await Paswrd.fill("tesasdat123#");
+  await SignIN.click();
+  const error_msg = (
+    await page.locator(".message-error.error.message").innerText()
+  ).valueOf();
+  console.log(error_msg);
+});
+
 test("Verify Forgot password screen and navigate back", async ({ page }) => {
   // go to the mentioned site
   await page.goto("https://magento.softwaretestingboard.com/");
@@ -248,9 +265,7 @@ test("Search an item using search bar", async ({ page }) => {
   await page.locator("#limiter").nth(1).selectOption("24");
 });
 
-test.only("Click on Training @smoke > Video Download Menu", async ({
-  page,
-}) => {
+test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
