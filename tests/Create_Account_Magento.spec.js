@@ -1,6 +1,8 @@
 const { test, expect } = require("@playwright/test");
 const { Sign_in, Sign_out } = require("./sign_in_spec");
 
+//********** LOGIN RELATED************** */
+
 test("Create New Account", async ({ page }) => {
   //navigate to the website
   page.goto("https://magento.softwaretestingboard.com/");
@@ -68,6 +70,7 @@ test("Verify Forgot password screen and navigate back", async ({ page }) => {
   await page.locator(".base").selectText();
 });
 
+//********** MEN'S TAB************** */
 test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   page,
 }) => {
@@ -205,6 +208,50 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   await Signout.doSignout();
 });
 
+test.only("Select an item from MEN's >>> hoodies and jackets", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //hover on Mens tab
+  await page.locator("#ui-id-5").hover();
+  //hover on Tops tab
+  await page.locator("#ui-id-17").hover();
+  //click on Jacket's & Hoodies
+  await page.locator("#ui-id-20").click();
+  //change to List from Grid Style
+  await page.locator("#mode-list").first().click();
+  //select hoodie size
+  await page.locator("#option-label-size-143-item-166").first().click();
+  //select color
+  await page.locator("#option-label-color-93-item-50").first().click();
+  //click add to cart button
+  await page.locator("(//button[@title='Add to Cart'])[1]").click();
+  //get success message
+  const item_success_msg = (
+    await page.locator(".message-success.success.message").innerText()
+  ).valueOf();
+  console.log(item_success_msg);
+  //select success message text
+  await page.locator(".message-success.success.message").selectText();
+  //click on cart icon
+  await page.locator("//a[@class='action showcart']").click();
+
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
+});
+
 test("Select a watch from Gear Menu", async ({ page }) => {
   //goto
   await page.goto("https://magento.softwaretestingboard.com/");
@@ -273,9 +320,7 @@ test("Search an item using search bar and change page size", async ({
   await Signout.doSignout();
 });
 
-test.only("Click on Advance search and fill all the criteria", async ({
-  page,
-}) => {
+test("Click on Advance search and fill all the criteria", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
