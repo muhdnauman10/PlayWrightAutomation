@@ -243,7 +243,7 @@ test("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
   await page.locator("xpath=//button[@title='Add to Cart']").nth(0).click();
 });
 
-test.only("Search an item using search bar and change page size", async ({
+test("Search an item using search bar and change page size", async ({
   page,
 }) => {
   //goto
@@ -271,6 +271,27 @@ test.only("Search an item using search bar and change page size", async ({
   //change page size
   await page.locator("#limiter").nth(1).selectOption("24");
   await Signout.doSignout();
+});
+
+test.only("Click on Advance search and fill all the criteria", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //click on Advance search link
+  await page.locator("text='Advanced Search'").last().click();
+  //fill the price from field
+  await page.locator("#price").fill("10");
+  //fill the price to field
+  await page.locator("#price_to").type("2000");
+  //click on search field
+  await page.locator("(//button[@title='Search'])[2]").click();
+  //catching search
+  const search_msg = (
+    await page.locator("//div[@class='search found']").innerText()
+  ).valueOf();
+  console.log(search_msg);
 });
 
 test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
