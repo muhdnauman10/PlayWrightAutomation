@@ -371,6 +371,29 @@ test("Select an item from Men's tab >>>Shorts", async ({ page }) => {
   await Signout.doSignout();
 });
 
+test.only("Add an item to wishlist and verify success message", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  // hover on Mens tab
+  await page.locator("#ui-id-5").hover();
+  //hover on Bottom
+  await page.locator("#ui-id-18").hover();
+  //click on shorts tab
+  await page.locator("#ui-id-24").click();
+  //click on Ist row last item
+  await page.locator("(//li[@class='item product product-item'])[4]").click();
+  //click on add to wish list
+  await page.locator("(//a[@class='action towishlist'])[1]").click();
+  //get success message
+  const wishlist_msg = (
+    await page.locator("(//div[@class='messages'])[1]").innerText()
+  ).valueOf();
+  console.log(wishlist_msg);
+});
+
 test("Select a watch from Gear Menu", async ({ page }) => {
   //goto
   await page.goto("https://magento.softwaretestingboard.com/");
@@ -668,7 +691,7 @@ test("Women tabs>Tops>Jackets,apply filter and select an item", async ({
   await Signout.doSignout();
 });
 
-test.only("Add an item to cart and delete it", async ({ page }) => {
+test("Add an item to cart and delete it", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
