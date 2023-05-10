@@ -327,7 +327,7 @@ test("Select an item from Men's tab>>>Tanks", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test.only("Select an item from Men's tab >>>Shorts", async ({ page }) => {
+test("Select an item from Men's tab >>>Shorts", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -668,7 +668,7 @@ test("Women tabs>Tops>Jackets,apply filter and select an item", async ({
   await Signout.doSignout();
 });
 
-test("Add an item to cart and delete it", async ({ page }) => {
+test.only("Add an item to cart and delete it", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -690,7 +690,9 @@ test("Add an item to cart and delete it", async ({ page }) => {
   //click on cart icon
   await page.locator("//a[@class='action showcart']").click();
   //delete item
-  await page.locator(".action.delete").click();
+  await page.locator(".action.delete").first().click();
+  //click on ok from delete promt
+  await page.locator("//button[@class='action-primary action-accept']").click();
   // //click signout
   await Signout.doSignout();
 });
