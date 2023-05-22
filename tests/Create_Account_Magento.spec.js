@@ -769,9 +769,7 @@ test("Select an item from Women's tab>>>Tees", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test.only("Select an item from Women's tab>>>bra's and tanks", async ({
-  page,
-}) => {
+test("Select an item from Women's tab>>>bra's and tanks", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -828,7 +826,79 @@ test.only("Select an item from Women's tab>>>bra's and tanks", async ({
   await Signout.doSignout();
 });
 
-test("Add an item to cart and delete it", async ({ page }) => {
+test("Select an item from Women's tab>>>bottoms>Pants", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //hover on women tab
+  await page.locator("//a[@id='ui-id-4']").hover();
+  //hower on bottoms
+  await page.locator("#ui-id-10").hover();
+  //click on Pants tab
+  await page.locator("#ui-id-15").click();
+  //click on item
+  await page.locator("(//li[@class='item product product-item'])[10]").click();
+  //select size
+  await page.locator("#option-label-size-143-item-171").click();
+  //select color
+  await page.locator("#option-label-color-93-item-50").click();
+  //click on add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //select item text
+  await page.locator(".base").selectText();
+  //click on cart icon
+  await page.locator(".action.showcart").click();
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
+});
+
+test("Select an item from Women's tab>>>bottoms>Shorts", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //hover on women tab
+  await page.locator("//a[@id='ui-id-4']").hover();
+  //hower on bottoms
+  await page.locator("#ui-id-10").hover();
+  //click on Shorts tab
+  await page.locator("#ui-id-16").click();
+  //select an item
+  await page.locator("(//li[@class='item product product-item'])[4]").click();
+  //select size
+  await page.locator("#option-label-size-143-item-172").click();
+  //select color
+  await page.locator("#option-label-color-93-item-52").click();
+  //click on add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //select item text
+  await page.locator(".base").selectText();
+  //click on cart icon
+  await page.locator(".action.showcart").click();
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
+});
+
+test.only("Add an item to cart and delete it", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
