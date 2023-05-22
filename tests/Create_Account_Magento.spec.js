@@ -898,7 +898,39 @@ test("Select an item from Women's tab>>>bottoms>Shorts", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test.only("Add an item to cart and delete it", async ({ page }) => {
+test.only("Womens Tab>> Add an item to cart and delete it ", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  //hover on women tab
+  await page.locator("//a[@id='ui-id-4']").hover();
+  //hower on tops
+  await page.locator("#ui-id-9").hover();
+  //click on hoodies & sweatshirts
+  await page.locator("#ui-id-12").click();
+  //click on ist row 2nd product
+  await page.locator("(//div[@class='product-item-info'])[2]").click();
+  //select size
+  await page.locator("#option-label-size-143-item-167").click();
+  //select color
+  await page.locator("#option-label-color-93-item-56").click();
+  //click on add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //select item text
+  await page.locator(".base").selectText();
+  //click on cart icon
+  await page.locator(".action.showcart").click();
+  //delete item
+  await page.locator(".action.delete").first().click();
+  //click on ok from delete promt
+  await page.locator("//button[@class='action-primary action-accept']").click();
+  // //click signout
+  await Signout.doSignout();
+});
+
+test("Mens>>Add an item to cart and delete it", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
