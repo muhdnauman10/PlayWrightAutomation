@@ -391,18 +391,112 @@ test("Add an item to wishlist and verify success message", async ({ page }) => {
   console.log(wishlist_msg);
 });
 
+test("Select a bag from Gear Menu", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+
+  //mouse hover on Gear menu item
+  await page.locator("#ui-id-6").hover();
+  // click on bags option
+  await page.locator("#ui-id-25").click();
+  //click on descending order
+  await page.locator("(//a[@title='Set Descending Direction'])[1]").click();
+  //click on bag
+  await page.locator("(//li[@class='item product product-item'])[6]").click();
+  //click on add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //select item text
+  await page.locator(".base").selectText();
+  //click on cart icon
+  await page.locator(".action.showcart").click();
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //get order number
+  const order_number = (
+    await page.locator(".checkout-success").innerText()
+  ).valueOf();
+  console.log(order_number);
+  //click signout
+  await Signout.doSignout();
+});
+
+test.only("Select a fitness equipment from Gear Menu", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+
+  //mouse hover on Gear menu item
+  await page.locator("#ui-id-6").hover();
+  // click on fitness equipment option
+  await page.locator("#ui-id-26").click();
+  //click on bottle
+  await page.locator("(//li[@class='item product product-item'])[11]").click();
+  //change the quantity
+  await page.locator("#qty").fill("");
+  await page.locator("#qty").type("5");
+  //click on add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //select item text
+  await page.locator(".base").selectText();
+  //click on cart icon
+  await page.locator(".action.showcart").click();
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
+});
+
 test("Select a watch from Gear Menu", async ({ page }) => {
-  //goto
-  await page.goto("https://magento.softwaretestingboard.com/");
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
 
   //mouse hover on Gear menu item
   await page.locator("#ui-id-6").hover();
   //click on watches option
   await page.locator("#ui-id-27").click();
   //hover on watch name = bolo sport watch
-  await page.locator("text=' Bolo Sport Watch '").hover();
+  //await page.locator("text=' Bolo Sport Watch '").hover();
   //click on add to cart button
-  await page.locator("xpath=//button[@title='Add to Cart']").nth(2).click();
+  //await page.locator("xpath=//button[@title='Add to Cart']").nth(2).click();
+  //click on watch
+  await page.locator("(//li[@class='item product product-item'])[3]").click();
+  //click on add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //select success message text
+  await page.locator(".message-success.success.message").selectText();
+
+  //click on cart icon
+  await page.locator(".action.showcart").click();
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
 });
 
 test("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
@@ -898,9 +992,7 @@ test("Select an item from Women's tab>>>bottoms>Shorts", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test.only("Womens Tab>> Add an item to cart and delete it ", async ({
-  page,
-}) => {
+test("Womens Tab>> Add an item to cart and delete it ", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
