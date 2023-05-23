@@ -429,7 +429,7 @@ test("Select a bag from Gear Menu", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test.only("Select a fitness equipment from Gear Menu", async ({ page }) => {
+test("Select a fitness equipment from Gear Menu", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -443,6 +443,46 @@ test.only("Select a fitness equipment from Gear Menu", async ({ page }) => {
   //change the quantity
   await page.locator("#qty").fill("");
   await page.locator("#qty").type("5");
+  //click on add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //select item text
+  await page.locator(".base").selectText();
+  //click on cart icon
+  await page.locator(".action.showcart").click();
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
+});
+
+test("Gear tab >> Apply few filters and select an item", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+
+  //mouse hover on Gear menu item
+  await page.locator("#ui-id-6").hover();
+  // click on fitness equipment option
+  await page.locator("#ui-id-26").click();
+  //click on Gender filter
+  await page.locator("text='Gender'").click();
+  await page.selectOption("text='Men'", "Men");
+  //click on mens option
+  //await page.locator("text='Men'").last().click();
+  //click on Activity filter
+  await page.locator("text='Activity'").click();
+  //select Gym option
+  await page.locator("text='Gym'").click();
+  //select pushup grips product
+  await page.locator("(//li[@class='item product product-item'])[6]").click();
   //click on add to cart button
   await page.locator("#product-addtocart-button").click();
   //select item text
@@ -499,9 +539,10 @@ test("Select a watch from Gear Menu", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
-  //goto
-  await page.goto("https://magento.softwaretestingboard.com/");
+test.only("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
   //click on sale tab from top menu
   await page.locator("text='Sale'").click();
   //click on Pants from left side links
@@ -521,6 +562,40 @@ test("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
   await page.locator("#option-label-color-93-item-58").nth(0).click();
   //click add to cart button
   await page.locator("xpath=//button[@title='Add to Cart']").nth(0).click();
+  //click on Material filter from left side
+  await page.locator("(//div[@class='filter-options-title'])[5]").click();
+  //select polyster option
+  await page.locator("text=' Polyester '").click();
+  //change to "List" style
+  //await page.locator("#mode-list").first().click();
+  //select the last product
+  await page
+    .locator("(//strong[@class='product name product-item-name'])[7]")
+    .click();
+  //select size
+  await page.locator("#option-label-size-143-item-175").click();
+  //select color
+  await page.locator("#option-label-color-93-item-50").click();
+
+  //click on add to cart button
+  await page.locator("#product-addtocart-button").click();
+  //select success message text
+  await page.locator(".message-success.success.message").selectText();
+
+  //click on cart icon
+  await page.locator(".action.showcart").click();
+  //click on proceed to check out button
+  await page.locator("#top-cart-btn-checkout").click();
+  await page.waitForLoadState("networkidle");
+  //click on next button
+  await page.locator("//button[@data-role='opc-continue']").click();
+  //click on place order button
+  const locator = page.locator("//button[@title='Place Order']");
+  await page.waitForSelector("//button[@title='Place Order']");
+  await locator.waitFor();
+  await locator.click();
+  //click signout
+  await Signout.doSignout();
 });
 
 test("Search an item using search bar and change page size", async ({
