@@ -25,8 +25,6 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   await mentabpage.clickAddToCart();
 
   // click on 2nd row last jacket
-
-  //await page.getByText("Orion Two-Tone Fitted Jacket").hover();
   await mentabpage.clickSecondJacket();
   await mentabpage.selectJacketClr2();
 
@@ -47,34 +45,26 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   await mentabpage.clickAddToCart3();
 
   // click on 3rd row Ist product
-  //await page.getByText("Kenobi Trail Jacket").nth(1).click();
   await mentabpage.selectProduct();
 
   // print the value of title in terminal
   await mentabpage.printProductTitle();
 
   // Print product name on terminal
-
   await mentabpage.verifyText();
 
   //select the jacket size
   await mentabpage.selectJacketSize2();
 
   //select the color
-
   await mentabpage.selectJacketClr4();
+
   //add quantity
   await mentabpage.qtyToBeVisible();
 
   //await page.locator("#qty").waitFor();
   await mentabpage.fillQuantity();
-  //await page.pause();
-  //click add to cart button
-  //await expect(page.locator("#product-addtocart-button")).toBeVisible();
-  //await expect(page).toHaveURL(
-  //"https://magento.softwaretestingboard.com/kenobi-trail-jacket.html"
-  // );
-  //await page.locator("//button[@type='submit']").waitFor();
+
   await mentabpage.clickAddToCart4();
 
   //click on Reviews tab
@@ -90,14 +80,10 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   //add the review about product
   await mentabpage.fillReview();
   //click on submit review button
-  //await page.locator("//button[@type='submit']").nth(2).click();
-  //await page.getByText("Submit Review").click();
   await mentabpage.clickSubmitBtn();
   //select jacket title text
   await mentabpage.selectJacketText();
   //click on cart icon
-  //await page.locator(".counter-number").waitFor();
-  //await page.locator(".counter-number").click();
   await mentabpage.clickCartIcon();
   //click on proceed to checkout button
   await mentabpage.clickProceedCheckOutBtn();
@@ -112,7 +98,6 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   await mentabpage.clickNextBtn();
   //click on place order button
   await mentabpage.clickPlaceOrder();
-
   await mentabpage.selectSpanText();
   //Signout
   await mentabpage.waitNetworkIdle();
