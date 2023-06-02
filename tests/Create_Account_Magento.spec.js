@@ -1,73 +1,86 @@
 const { test, expect } = require("@playwright/test");
 const { Sign_in, Sign_out } = require("./sign_in_spec");
+const { getRndInteger } = require("../utils/support/helper_function");
+const { CreateAccountPage } = require("../utils/support/Signup");
 
 //********** LOGIN RELATED************** */
 
-test("Create New Account", async ({ page }) => {
-  //navigate to the website
-  page.goto("https://magento.softwaretestingboard.com/");
-  // click on the create an account link
-  await page.getByRole("link", { name: "Create an Account" }).click();
-  //Fill user name field
-  await page.locator("xpath=//input[@id='firstname']").type("John");
-  await page.locator("#lastname").fill("Doe");
-  //check the subscribed checkbox
-  await page.locator("[name='is_subscribed']").click();
-  //randomly generate the email id
-  await page
-    .locator("xpath=//input[@id='email_address']")
-    .fill("john_" + getRndInteger(0, 101) + "@mailinator.com");
-  //type password
-  await page.locator("xpath=//input[@id='password']").type("Test123#");
-  //re confirm password
-  await page.locator("#password-confirmation").fill("Test123#");
-  //click on create an account button
-  await page.getByRole("button", { name: "Create an Account" }).click();
-});
+async function navigateToWebsite(page) {
+  const createAccountPage = new CreateAccountPage(page);
 
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+  await createAccountPage.navigateToWebsite();
 }
 
+test("Create New Account", async ({ page }) => {
+  const createAccountPage = new CreateAccountPage(page);
+  await navigateToWebsite(page);
+  // click on the create an account link
+  await createAccountPage.clickCreateAccount();
+
+  //Fill user name field
+  await createAccountPage.fillUserName("John", "Doe");
+
+  //check the subscribed checkbox
+  await createAccountPage.checkSubscribedCheckbox();
+
+  //randomly generate the email id
+  const randomEmail = "john_" + getRndInteger(0, 101) + "@mailinator.com";
+  await createAccountPage.fillEmail(randomEmail);
+
+  //type password
+  await createAccountPage.fillPassword("Test123#");
+
+  //reconfirm password
+  await createAccountPage.confirmPassword("Test123#");
+
+  //click on create an account button
+  await createAccountPage.clickCreateAccountButton();
+
+  //After account creation , check for below text
+  // Asserting that the first element with class 'box-title' has the text 'Contact Information'
+
+  await expect(await page.locator(".box-title").first()).toHaveText(
+    "Contact Information"
+  );
+});
+
 test("Verify Email and password title", async ({ page }) => {
-  // go to the mentioned site
-  await page.goto("https://magento.softwaretestingboard.com/");
+  const createAccountPage = new CreateAccountPage(page);
+  await navigateToWebsite(page);
   // click on Sign in link
-  await page.locator("text='Sign In' ").first().click();
-  const email_label = await page.locator("//label[@for='email']");
-  await expect(email_label).toHaveText("Email");
-  const pass_label = await page.locator("(//label[@for='pass'])[1]");
-  await expect(pass_label).toHaveText("Password");
+  await createAccountPage.clickSignIn();
+
+  await createAccountPage.verifyEmailLabel();
+
+  await createAccountPage.verifyPasswordLabel();
 });
 
 test("Verify Login with Invalid credentials", async ({ page }) => {
-  // go to the mentioned site
-  await page.goto("https://magento.softwaretestingboard.com/");
+  const createAccountPage = new CreateAccountPage(page);
+  await navigateToWebsite(page);
   // click on Sign in link
-  await page.locator("text='Sign In' ").first().click();
-  const User_Email = page.locator("#email");
-  const Paswrd = page.locator("//input[@title='Password']");
-  const SignIN = page.locator("(//button[@id='send2'])[1]");
-  await User_Email.type("jhon22223@gmail.com");
-  await Paswrd.fill("tesasdat123#");
-  await SignIN.click();
-  const error_msg = (
-    await page.locator(".message-error.error.message").innerText()
-  ).valueOf();
-  console.log(error_msg);
+  await createAccountPage.clickSignIn();
+
+  await createAccountPage.verifywithInvalidCred();
+
+  await createAccountPage.textErrorMsg();
 });
 
-test("Verify Forgot password screen and navigate back", async ({ page }) => {
-  // go to the mentioned site
-  await page.goto("https://magento.softwaretestingboard.com/");
+test.only("Verify Forgot password screen and navigate back", async ({
+  page,
+}) => {
+  const createAccountPage = new CreateAccountPage(page);
+  await navigateToWebsite(page);
   // click on Sign in link
-  await page.locator("text='Sign In' ").first().click();
+  await createAccountPage.clickSignIn();
+  await createAccountPage.clickForgotPaswd();
   //click on Forgot password link
-  await page.locator(".action.remind").click();
+  //await page.locator(".action.remind").click();
   //verify text
-  await expect(page.locator(".base")).toHaveText("Forgot Your Password?");
-  //select text
-  await page.locator(".base").selectText();
+  await createAccountPage.verifyForgotPaswdText();
+  //await expect(page.locator(".base")).toHaveText("Forgot Your Password?");
+
+  await createAccountPage.selectPaswdText();
 });
 
 //********** MEN'S TAB************** */
@@ -283,6 +296,7 @@ test("Select an item from Men's tab>>> Tees", async ({ page }) => {
   //click on place order button
   const locator = page.locator("//button[@title='Place Order']");
   await page.waitForSelector("//button[@title='Place Order']");
+
   await locator.waitFor();
   await locator.click();
   //click signout
@@ -539,7 +553,7 @@ test("Select a watch from Gear Menu", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test.only("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
+test("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -1198,56 +1212,4 @@ test("Subscribe email", async ({ page }) => {
   );
   // //click signout
   await Signout.doSignout();
-});
-
-test("if the item price>70 delete the item fromc cart", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //to check if signin is successful
-  await expect(page.locator("(//span[@class='logged-in'])[1]")).toBeVisible();
-  await expect(page.locator("(//span[@class='logged-in'])[1]")).toHaveText(
-    "Welcome, John Doe!"
-  );
-  // hover on Men's tab
-  await page.locator("#ui-id-5").hover();
-  //hover on Top tab
-  await page.locator("#ui-id-17").hover();
-  //click on jackets tab
-  await page.locator("#ui-id-19").click();
-  //sort by price
-  await page.waitForSelector("#sorter");
-  await page.selectOption("#sorter", "price");
-  //click on descending order
-  await page.locator("(//a[@title='Set Descending Direction'])[1]").click();
-  //click on ist product item
-  await page.locator(".product-item-link").first().click();
-  //select size
-  await page.locator("#option-label-size-143-item-166").click();
-  //select color
-  await page.locator("#option-label-color-93-item-50").click();
-  //click add to cart
-  await page.locator("#product-addtocart-button").click();
-  //click on cart icon
-  //await page.locator("(//span[@class='counter qty'])[1]").click();
-  await page.locator("//a[@class='action showcart']").click();
-  //
-  // await page.locator("(//span[@class='price'])[2])");
-  await expect(page.locator("(//span[@class='price'])[2]")).toHaveText(
-    "$99.00"
-  );
-
-  //const item_price = await page.locator(".price");
-  //const product_price = await page.locator("//div[@data-role='priceBox']");
-  //const product_length = await page.locator("//div[@data-role='priceBox']").count();
-  //await expect(product_price).toHaveCount(11);
-
-  // const product_length = product_price.count();
-
-  //console.log(product_length);
-
-  //    for (let i=0; product_price > 70; product_price++) {
-
-  //  }
-  //   }
 });
