@@ -44,7 +44,7 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   //select the jacket size
   await mentabpage.selectJacketSize2();
   //select the color
-  await mentabpage.selectJacketClr4();
+  await mentabpage.selectProductClr();
   //add quantity
   await mentabpage.qtyToBeVisible();
   await mentabpage.fillQuantity();
@@ -129,7 +129,7 @@ test("Select an item from MEN's >>> hoodies and jackets", async ({ page }) => {
 
 //********** Test Case#3 START************** */
 
-test.only("Select an item from Men's tab>>> Tees", async ({ page }) => {
+test("Select an item from Men's tab>>> Tees", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -166,3 +166,109 @@ test.only("Select an item from Men's tab>>> Tees", async ({ page }) => {
 });
 
 //********** Test Case#3 END************** */
+
+//********** Test Case#4 START************** */
+
+test("Select an item from Men's tab>>>Tanks", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const mentabpage = new MenTabPage(page);
+  //hover on Mens tab
+  await mentabpage.hoveronMen();
+  //hover on Tops tab
+  await mentabpage.hoveronTop();
+  //click on tank option
+  await mentabpage.clickOnTanks();
+  //click on ist row last item
+  await mentabpage.clickonProductItem();
+  //select size
+  await mentabpage.selectTankSize();
+  //select color
+  await mentabpage.selectProductClr();
+  //click on add to cart button
+  await mentabpage.clickAddToCart6();
+  //get product title
+  await mentabpage.printProductTitle();
+  //click on cart icon
+  await mentabpage.clickCartIcon2();
+  //click on proceed to check out button
+  await mentabpage.clickProceedCheckOutBtn();
+  await mentabpage.waitNetworkIdle();
+  //click on next button
+  await mentabpage.clickNextBtn();
+  //click on place order button
+  await mentabpage.clickPlaceOrder();
+  //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#4 END************** */
+
+//********** Test Case#5 START************** */
+
+test("Select an item from Men's tab >>>Shorts", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const mentabpage = new MenTabPage(page);
+  // hover on Mens tab
+  await mentabpage.hoveronMen();
+  //hover on Bottom
+  await mentabpage.hoveronBottom();
+  //click on shorts tab
+  await mentabpage.clickonShorts();
+  //sort by price
+  await mentabpage.waitForSorter();
+  await mentabpage.sortbyPrice();
+  //click on 2nd row ist item
+  await mentabpage.clickonProduct2();
+  //select size
+  await mentabpage.selectProductSize();
+  //select color
+  await mentabpage.selectProductClr2();
+  //click on add to cart button
+  await mentabpage.clickAddToCart6();
+  //select item text
+  await mentabpage.selectProductText();
+  //click on cart icon
+  await mentabpage.clickCartIcon2();
+  //click on proceed to check out button
+  await mentabpage.clickProceedCheckOutBtn();
+  await mentabpage.waitNetworkIdle();
+  //click on next button
+  await mentabpage.clickNextBtn();
+  //click on place order button
+  await mentabpage.clickPlaceOrder();
+  //get order number
+  await mentabpage.printOrderNum();
+  //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#5 END************** */
+
+//********** Test Case#6 START************** */
+
+test.only("Add an item to wishlist and verify success message", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const mentabpage = new MenTabPage(page);
+  // hover on Mens tab
+  await mentabpage.hoveronMen();
+  //hover on Bottom
+  await mentabpage.hoveronBottom();
+  //click on shorts tab
+  await mentabpage.clickonShorts();
+  //click on Ist row last item
+  await mentabpage.clickonProductItem();
+  //click on add to wish list
+  await mentabpage.addtoWishList();
+  //get success message
+  await mentabpage.printsuccessmsg();
+});
+
+//********** Test Case#6 END************** */

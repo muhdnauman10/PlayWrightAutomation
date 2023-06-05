@@ -303,107 +303,107 @@ test.only("Verify Forgot password screen and navigate back", async ({
 //   await Signout.doSignout();
 // });
 
-test("Select an item from Men's tab>>>Tanks", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //hover on Mens tab
-  await page.locator("#ui-id-5").hover();
-  //hover on Tops tab
-  await page.locator("#ui-id-17").hover();
-  //click on tank option
-  await page.locator("#ui-id-22").click();
-  //click on ist row last item
-  await page.locator("(//li[@class='item product product-item'])[4]").click();
-  //select size
-  await page.locator("#option-label-size-143-item-168").click();
-  //select color
-  await page.locator("#option-label-color-93-item-50").click();
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //get product title
-  const item_title = (await page.locator(".base").innerText()).valueOf();
-  console.log(item_title);
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //click on proceed to check out button
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //click signout
-  await Signout.doSignout();
-});
+// test("Select an item from Men's tab>>>Tanks", async ({ page }) => {
+//   const Signin = new Sign_in(page);
+//   const Signout = new Sign_out(page);
+//   await Signin.doSignin();
+//   //hover on Mens tab
+//   await page.locator("#ui-id-5").hover();
+//   //hover on Tops tab
+//   await page.locator("#ui-id-17").hover();
+//   //click on tank option
+//   await page.locator("#ui-id-22").click();
+//   //click on ist row last item
+//   await page.locator("(//li[@class='item product product-item'])[4]").click();
+//   //select size
+//   await page.locator("#option-label-size-143-item-168").click();
+//   //select color
+//   await page.locator("#option-label-color-93-item-50").click();
+//   //click on add to cart button
+//   await page.locator("#product-addtocart-button").click();
+//   //get product title
+//   const item_title = (await page.locator(".base").innerText()).valueOf();
+//   console.log(item_title);
+//   //click on cart icon
+//   await page.locator(".action.showcart").click();
+//   //click on proceed to check out button
+//   await page.locator("#top-cart-btn-checkout").click();
+//   await page.waitForLoadState("networkidle");
+//   //click on next button
+//   await page.locator("//button[@data-role='opc-continue']").click();
+//   //click on place order button
+//   const locator = page.locator("//button[@title='Place Order']");
+//   await page.waitForSelector("//button[@title='Place Order']");
+//   await locator.waitFor();
+//   await locator.click();
+//   //click signout
+//   await Signout.doSignout();
+// });
 
-test("Select an item from Men's tab >>>Shorts", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  // hover on Mens tab
-  await page.locator("#ui-id-5").hover();
-  //hover on Bottom
-  await page.locator("#ui-id-18").hover();
-  //click on shorts tab
-  await page.locator("#ui-id-24").click();
-  //sort by price
-  await page.waitForSelector("#sorter");
-  await page.selectOption("#sorter", "price");
-  //click on 2nd row ist item
-  await page.locator("(//li[@class='item product product-item'])[5]").click();
-  //select size
-  await page.locator("#option-label-size-143-item-176").click();
-  //select color
-  await page.locator("#option-label-color-93-item-53").click();
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //select item text
-  await page.locator(".base").selectText();
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //click on proceed to check out button
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //get order number
-  const order_number = (
-    await page.locator(".checkout-success").innerText()
-  ).valueOf();
-  console.log(order_number);
-  //click signout
-  await Signout.doSignout();
-});
+// test("Select an item from Men's tab >>>Shorts", async ({ page }) => {
+//   const Signin = new Sign_in(page);
+//   const Signout = new Sign_out(page);
+//   await Signin.doSignin();
+//   // hover on Mens tab
+//   await page.locator("#ui-id-5").hover();
+//   //hover on Bottom
+//   await page.locator("#ui-id-18").hover();
+//   //click on shorts tab
+//   await page.locator("#ui-id-24").click();
+//   //sort by price
+//   await page.waitForSelector("#sorter");
+//   await page.selectOption("#sorter", "price");
+//   //click on 2nd row ist item
+//   await page.locator("(//li[@class='item product product-item'])[5]").click();
+//   //select size
+//   await page.locator("#option-label-size-143-item-176").click();
+//   //select color
+//   await page.locator("#option-label-color-93-item-53").click();
+//   //click on add to cart button
+//   await page.locator("#product-addtocart-button").click();
+//   //select item text
+//   await page.locator(".base").selectText();
+//   //click on cart icon
+//   await page.locator(".action.showcart").click();
+//   //click on proceed to check out button
+//   await page.locator("#top-cart-btn-checkout").click();
+//   await page.waitForLoadState("networkidle");
+//   //click on next button
+//   await page.locator("//button[@data-role='opc-continue']").click();
+//   //click on place order button
+//   const locator = page.locator("//button[@title='Place Order']");
+//   await page.waitForSelector("//button[@title='Place Order']");
+//   await locator.waitFor();
+//   await locator.click();
+//   //get order number
+//   const order_number = (
+//     await page.locator(".checkout-success").innerText()
+//   ).valueOf();
+//   console.log(order_number);
+//   //click signout
+//   await Signout.doSignout();
+// });
 
-test("Add an item to wishlist and verify success message", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  // hover on Mens tab
-  await page.locator("#ui-id-5").hover();
-  //hover on Bottom
-  await page.locator("#ui-id-18").hover();
-  //click on shorts tab
-  await page.locator("#ui-id-24").click();
-  //click on Ist row last item
-  await page.locator("(//li[@class='item product product-item'])[4]").click();
-  //click on add to wish list
-  await page.locator("(//a[@class='action towishlist'])[1]").click();
-  //get success message
-  const wishlist_msg = (
-    await page.locator("(//div[@class='messages'])[1]").innerText()
-  ).valueOf();
-  console.log(wishlist_msg);
-});
+// test("Add an item to wishlist and verify success message", async ({ page }) => {
+//   const Signin = new Sign_in(page);
+//   const Signout = new Sign_out(page);
+//   await Signin.doSignin();
+//   // hover on Mens tab
+//   await page.locator("#ui-id-5").hover();
+//   //hover on Bottom
+//   await page.locator("#ui-id-18").hover();
+//   //click on shorts tab
+//   await page.locator("#ui-id-24").click();
+//   //click on Ist row last item
+//   await page.locator("(//li[@class='item product product-item'])[4]").click();
+//   //click on add to wish list
+//   await page.locator("(//a[@class='action towishlist'])[1]").click();
+//   //get success message
+//   const wishlist_msg = (
+//     await page.locator("(//div[@class='messages'])[1]").innerText()
+//   ).valueOf();
+//   console.log(wishlist_msg);
+// });
 
 test("Select a bag from Gear Menu", async ({ page }) => {
   const Signin = new Sign_in(page);

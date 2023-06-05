@@ -65,7 +65,7 @@ export class MenTabPage {
   async selectJacketSize2() {
     await this.page.locator("//div[@option-id='170']").click();
   }
-  async selectJacketClr4() {
+  async selectProductClr() {
     await this.page.locator("#option-label-color-93-item-50").click();
   }
   async qtyToBeVisible() {
@@ -199,5 +199,57 @@ export class MenTabPage {
   }
   async clickAddToCart6() {
     await this.page.locator("#product-addtocart-button").click();
+  }
+  async clickOnTanks() {
+    await this.page.locator("#ui-id-22").click();
+  }
+  async clickonProductItem() {
+    await this.page
+      .locator("(//li[@class='item product product-item'])[4]")
+      .click();
+  }
+  async selectTankSize() {
+    await this.page.locator("#option-label-size-143-item-168").click();
+  }
+  async hoveronBottom() {
+    await this.page.locator("#ui-id-18").hover();
+  }
+  async clickonShorts() {
+    await this.page.locator("#ui-id-24").click();
+  }
+  async waitForSorter() {
+    await this.page.waitForSelector("#sorter");
+  }
+  async sortbyPrice() {
+    await this.page.selectOption("#sorter", "price");
+  }
+  async clickonProduct2() {
+    await this.page
+      .locator("(//li[@class='item product product-item'])[5]")
+      .click();
+  }
+  async selectProductSize() {
+    await this.page.locator("#option-label-size-143-item-176").click();
+  }
+  async selectProductClr2() {
+    await this.page.locator("#option-label-color-93-item-53").click();
+  }
+  async selectProductText() {
+    await this.page.locator(".base").selectText();
+  }
+  async printOrderNum() {
+    const order_number = (
+      await this.page.locator(".checkout-success").innerText()
+    ).valueOf();
+    console.log(order_number);
+  }
+  async addtoWishList() {
+    await this.page.locator("(//a[@class='action towishlist'])[1]").click();
+  }
+  async printsuccessmsg() {
+    const wishlist_msg = (
+      await this.page.locator("(//div[@class='messages'])[1]").innerText()
+    ).valueOf();
+    console.log(wishlist_msg);
   }
 }
