@@ -98,7 +98,8 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   await mentabpage.clickNextBtn();
   //click on place order button
   await mentabpage.clickPlaceOrder();
-  await mentabpage.selectSpanText();
+  //await mentabpage.selectSpanText();
+  await mentabpage.clickContinueShopping();
   //Signout
   await mentabpage.waitNetworkIdle();
   await Signout.doSignout();

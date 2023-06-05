@@ -117,7 +117,7 @@ export class MenTabPage {
     await this.page.locator("#top-cart-btn-checkout").click();
   }
   async waitNetworkIdle() {
-    await this.page.waitForLoadState("networkidle");
+    await this.page.waitForLoadState("networkidle", { timeout: 30000 });
   }
   async inputStreetAdres() {
     await this.page
@@ -147,9 +147,15 @@ export class MenTabPage {
     //await locator.waitFor();
     await locator.click();
   }
-  async selectSpanText() {
-    await this.page
-      .locator("//span[@data-ui-id='page-title-wrapper']")
-      .selectText();
+  //async selectSpanText() {
+  //await this.page
+  //.locator("//span[@data-ui-id='page-title-wrapper']")
+  //.selectText();
+  // await this.page
+  // .locator("//span[@data-ui-id='page-title-wrapper']")
+  //.selectText();
+  //}
+  async clickContinueShopping() {
+    await this.page.locator(".action.primary.continue").click();
   }
 }
