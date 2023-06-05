@@ -89,9 +89,7 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
 
 //********** Test Case#2 START************** */
 
-test.only("Select an item from MEN's >>> hoodies and jackets", async ({
-  page,
-}) => {
+test("Select an item from MEN's >>> hoodies and jackets", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -128,3 +126,43 @@ test.only("Select an item from MEN's >>> hoodies and jackets", async ({
 });
 
 //********** Test Case#2 END************** */
+
+//********** Test Case#3 START************** */
+
+test.only("Select an item from Men's tab>>> Tees", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const mentabpage = new MenTabPage(page);
+  //hover on Mens tab
+  await mentabpage.hoveronMen();
+  //hover on Tops tab
+  await mentabpage.hoveronTop();
+  //click on tees tab
+  await mentabpage.clickOnTees();
+  //click on ist product name
+  await mentabpage.clickonProduct();
+  //select tee size
+  await mentabpage.selectTeeSize();
+  //select color
+  await mentabpage.selectTeeClr();
+  //enter qty
+  await mentabpage.fillQuantity();
+  //click on add to cart button
+  await mentabpage.clickAddToCart6();
+  //select success message text
+  await mentabpage.selectSuccessText();
+  //click on cart icon
+  await mentabpage.clickCartIcon2();
+  //click on proceed to check out button
+  await mentabpage.clickProceedCheckOutBtn();
+  await mentabpage.waitNetworkIdle();
+  //click on next button
+  await mentabpage.clickNextBtn();
+  //click on place order button
+  await mentabpage.clickPlaceOrder();
+  //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#3 END************** */

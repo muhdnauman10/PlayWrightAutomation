@@ -185,4 +185,19 @@ export class MenTabPage {
   async clickCartIcon2() {
     await this.page.locator("//a[@class='action showcart']").click();
   }
+  async clickOnTees() {
+    await this.page.locator("#ui-id-21").click();
+  }
+  async clickonProduct() {
+    await this.page.locator(".product.name.product-item-name").first().click();
+  }
+  async selectTeeSize() {
+    await this.page.locator("#option-label-size-143-item-169").click();
+  }
+  async selectTeeClr() {
+    await this.page.locator("#option-label-color-93-item-58").click();
+  }
+  async clickAddToCart6() {
+    await this.page.locator("#product-addtocart-button").click();
+  }
 }
