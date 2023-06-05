@@ -158,4 +158,31 @@ export class MenTabPage {
   async clickContinueShopping() {
     await this.page.locator(".action.primary.continue").click();
   }
+  async clickOnHoodies() {
+    await this.page.locator("#ui-id-20").click();
+  }
+  async listStyle() {
+    await this.page.locator("#mode-list").first().click();
+  }
+  async clickHoodieSize() {
+    await this.page.locator("#option-label-size-143-item-166").first().click();
+  }
+  async selectHoodieClr() {
+    await this.page.locator("#option-label-color-93-item-50").first().click();
+  }
+  async clickAddToCart5() {
+    await this.page.locator("(//button[@title='Add to Cart'])[1]").click();
+  }
+  async successMsg() {
+    const item_success_msg = (
+      await this.page.locator(".message-success.success.message").innerText()
+    ).valueOf();
+    console.log(item_success_msg);
+  }
+  async selectSuccessText() {
+    await this.page.locator(".message-success.success.message").selectText();
+  }
+  async clickCartIcon2() {
+    await this.page.locator("//a[@class='action showcart']").click();
+  }
 }
