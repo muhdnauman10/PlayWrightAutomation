@@ -71,7 +71,7 @@ test("Mouse hover -> Menu bar -> Select Multiple jackets ", async ({
   await mentabpage.clickProceedCheckOutBtn();
   await mentabpage.waitNetworkIdle();
   // add the street address
-  await mentabpage.inputStreetAdres();
+  //await mentabpage.inputStreetAdres();
   // Check radio button
   await mentabpage.chkRadioBtn();
   //click on next button
@@ -250,9 +250,7 @@ test("Select an item from Men's tab >>>Shorts", async ({ page }) => {
 
 //********** Test Case#6 START************** */
 
-test.only("Add an item to wishlist and verify success message", async ({
-  page,
-}) => {
+test("Add an item to wishlist and verify success message", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();

@@ -114,6 +114,7 @@ export class MenTabPage {
     await this.page.locator("(//span[@class='counter qty'])[2]").click();
   }
   async clickProceedCheckOutBtn() {
+    await this.page.waitForSelector("#top-cart-btn-checkout");
     await this.page.locator("#top-cart-btn-checkout").click();
   }
   async waitNetworkIdle() {
@@ -141,11 +142,9 @@ export class MenTabPage {
     await this.page.locator("//button[@data-role='opc-continue']").click();
   }
   async clickPlaceOrder() {
-    const locator = this.page.locator("//button[@title='Place Order']");
-
-    //await this.page.waitForSelector("//button[@title='Place Order']");
+    await this.page.waitForSelector("//button[@title='Place Order']");
+    await this.page.locator("//button[@title='Place Order']").click();
     //await locator.waitFor();
-    await locator.click();
   }
   //async selectSpanText() {
   //await this.page
