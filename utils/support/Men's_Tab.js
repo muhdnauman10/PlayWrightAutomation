@@ -270,4 +270,45 @@ export class MenTabPage {
   async detailProductText() {
     await this.page.locator(".product.attribute.description").selectText();
   }
+  async deleteCart() {
+    await this.page.locator(".action.delete").first().click();
+  }
+  async clickOK() {
+    await this.page
+      .locator("//button[@class='action-primary action-accept']")
+      .click();
+  }
+  async clickonJacket() {
+    await this.page.locator("a.product-item-link").nth(1).click();
+  }
+  //   async priceTextContent() {
+  //     const price = await this.page.$eval(
+  //       "#product-price-238",
+  //       (el) => el.textContent
+  //     );
+  //   }
+  //   async parseFloat() {
+  //     const numericPrice = parseFloat(price.replace("$", ""));
+  //     if (numericPrice < 70) {
+  //       await this.page.locator("#qty").click();
+  //       await this.page.locator("#qty").fill("4");
+  //     }
+  //   }
+
+  async priceTextContent() {
+    const price = await this.page.$eval(
+      "#product-price-238",
+      (el) => el.textContent
+    );
+    return price; // Return the price value
+  }
+
+  async parseFloat() {
+    const price = await this.priceTextContent(); // Get the price value
+    const numericPrice = parseFloat(price.replace("$", ""));
+    if (numericPrice < 70) {
+      await this.page.locator("#qty").click();
+      await this.page.locator("#qty").fill("4");
+    }
+  }
 }

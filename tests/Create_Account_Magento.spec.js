@@ -385,47 +385,6 @@ test("Click on Gear tab and sort by price and select an item ", async ({
   await Signout.doSignout();
 });
 
-test("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
-  page,
-}) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  // hover on Mens tab
-  await page.locator("#ui-id-5").hover();
-  //hover on Bottom
-  await page.locator("#ui-id-18").hover();
-  //click on Pants tab
-  await page.locator("#ui-id-23").click();
-  //change to List from Grid Style
-  await page.locator("#mode-list").first().click();
-  //click on 2nd page
-  await waitForSelector("(//li[@class='item pages-item-next'])[1]");
-  await page.locator("(//li[@class='item pages-item-next'])[1]").click();
-  //await page.locator("xpath=//a[@title='Next']").nth(1).click();
-  //click on product title
-  await page.locator(".product-item-link").nth(1).click();
-  //select size
-  await page.locator("#option-label-size-143-item-175").click();
-  //select color
-  await page.locator("#option-label-color-93-item-49").click();
-  //click add to cart
-  await page.locator(" //button[@title='Add to Cart']").click();
-  //click on cart icon
-  await page.locator("//a[@class='action showcart']").click();
-  //click on proceed to checkout
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //click signout
-  await Signout.doSignout();
-});
 
 test("Go to “Sale” tab and select on Shorts under Men’s deal from left navigation hyperlink", async ({
   page,
@@ -789,34 +748,7 @@ test("Womens Tab>> Add an item to cart and delete it ", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test("Mens>>Add an item to cart and delete it", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
 
-  await page.locator("#ui-id-5").hover();
-  await page.locator("#ui-id-17").hover();
-  await page.locator("#ui-id-19").click();
-
-  //click on ist jacket
-  await page
-    .locator("//div[@id='option-label-size-143-item-166']")
-    .nth(0)
-    .click();
-
-  //select jacket color
-  await page.locator("#option-label-color-93-item-49").nth(0).click();
-  //click on the Add to cart button
-  await page.locator("//button[@title='Add to Cart']").first().click();
-  //click on cart icon
-  await page.locator("//a[@class='action showcart']").click();
-  //delete item
-  await page.locator(".action.delete").first().click();
-  //click on ok from delete promt
-  await page.locator("//button[@class='action-primary action-accept']").click();
-  // //click signout
-  await Signout.doSignout();
-});
 
 test("If item price is less than 70$ increase the qty to 4", async ({
   page,

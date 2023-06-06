@@ -272,7 +272,7 @@ test("Add an item to wishlist and verify success message", async ({ page }) => {
 //********** Test Case#6 END************** */
 
 //********** Test Case#7 START************** */
-test.only("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
+test("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -315,3 +315,65 @@ test.only("Change to 'List' Style from 'Grid' and Select an item from 2nd page M
 });
 
 //********** Test Case#7 END************** */
+
+//********** Test Case#8 START************** */
+
+test("Mens>>Add an item to cart and delete it", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const mentabpage = new MenTabPage(page);
+  await mentabpage.hoveronMen();
+  await mentabpage.hoveronTop();
+  await mentabpage.clickMenTab();
+  //click on ist jacket
+  await mentabpage.clickFirstJacket();
+  //select jacket color
+  await mentabpage.selectJacketClr();
+  //click on the Add to cart button
+  await mentabpage.clickAddToCart();
+  //click on cart icon
+  await mentabpage.clickCartIcon2();
+  //delete item
+  await mentabpage.deleteCart();
+  //click on ok from delete promt
+  await mentabpage.clickOK();
+  // //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#8 END************** */
+
+//********** Test Case#9 START************** */
+
+test.only("If item price is less than 70$ increase the qty to 4", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const mentabpage = new MenTabPage(page);
+  //hover on Mens tab
+  await mentabpage.hoveronMen();
+  //hover on Tops
+  await mentabpage.hoveronTop();
+  //click on hoodies & jackets
+  await mentabpage.clickOnHoodies();
+  //click on jacket less than $70
+  await mentabpage.clickonJacket();
+  // retrives text content
+  await mentabpage.priceTextContent();
+  // converting string to floating
+  //parseFloat and replace both are built-in javascript methods
+  await mentabpage.parseFloat();
+  // const numericPrice = parseFloat(price.replace("$", ""));
+
+  // if (numericPrice < 70) {
+  //   await page.locator("#qty").click();
+  //   await page.locator("#qty").fill("4");
+  // //click signout
+  await Signout.doSignout();
+  // }
+});
+
+//********** Test Case#9 END************** */
