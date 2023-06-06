@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
 const { Sign_in, Sign_out } = require("./sign_in_spec");
-const { MenTabPage } = require("../utils/support/Men's_Tab");
+const { MenTabPage } = require("../utils/support/Men's_Tab_POM");
 
 //********** MEN'S TAB************** */
 //********** Test Case#1 START************** */
@@ -366,11 +366,6 @@ test.only("If item price is less than 70$ increase the qty to 4", async ({
   // converting string to floating
   //parseFloat and replace both are built-in javascript methods
   await mentabpage.parseFloat();
-  // const numericPrice = parseFloat(price.replace("$", ""));
-
-  // if (numericPrice < 70) {
-  //   await page.locator("#qty").click();
-  //   await page.locator("#qty").fill("4");
   // //click signout
   await Signout.doSignout();
   // }

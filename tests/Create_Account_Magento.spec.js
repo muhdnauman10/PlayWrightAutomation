@@ -750,33 +750,7 @@ test("Womens Tab>> Add an item to cart and delete it ", async ({ page }) => {
 
 
 
-test("If item price is less than 70$ increase the qty to 4", async ({
-  page,
-}) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //hover on Mens tab
-  await page.locator("#ui-id-5").hover();
-  //hover on Tops
-  await page.locator("#ui-id-17").hover();
-  //click on hoodies & jackets
-  await page.locator("#ui-id-20").click();
-  //click on jacket less than $70
-  await page.locator("a.product-item-link").nth(1).click();
 
-  const price = await page.$eval("#product-price-238", (el) => el.textContent);
-  // converting string to floating
-  //parseFloat and replace both are built-in javascript methods
-  const numericPrice = parseFloat(price.replace("$", ""));
-
-  if (numericPrice < 70) {
-    await page.locator("#qty").click();
-    await page.locator("#qty").fill("4");
-    // //click signout
-    await Signout.doSignout();
-  }
-});
 
 test("Click Contact us and fill the form", async ({ page }) => {
   const Signin = new Sign_in(page);
