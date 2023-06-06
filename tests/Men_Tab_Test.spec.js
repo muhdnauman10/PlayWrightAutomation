@@ -270,3 +270,48 @@ test("Add an item to wishlist and verify success message", async ({ page }) => {
 });
 
 //********** Test Case#6 END************** */
+
+//********** Test Case#7 START************** */
+test.only("Change to 'List' Style from 'Grid' and Select an item from 2nd page Mens->Bottoms->Pants", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const mentabpage = new MenTabPage(page);
+  // hover on Mens tab
+  await mentabpage.hoveronMen();
+  //hover on Bottom
+  await mentabpage.hoveronBottom();
+  //click on Pants tab
+  await mentabpage.clickPantTab();
+  //change to List from Grid Style
+  await mentabpage.listStyle();
+  //click on 2nd page
+  await mentabpage.clickPagination();
+  //await page.locator("xpath=//a[@title='Next']").nth(1).click();
+  //click on product title
+  await mentabpage.clickProductTitle();
+  //select size
+  await mentabpage.selectProductSize2();
+  //select color
+  await mentabpage.selectProductClr3();
+  //click add to cart
+  //await page.locator(" //button[@title='Add to Cart']").click();
+  await mentabpage.clickAddToCart6();
+  //click on cart icon
+  await mentabpage.clickCartIcon2();
+  //select product detail text
+  await mentabpage.detailProductText();
+  //click on proceed to checkout
+  await mentabpage.clickProceedCheckOutBtn();
+  await mentabpage.waitNetworkIdle();
+  //click on next button
+  await mentabpage.clickNextBtn();
+  //click on place order button
+  await mentabpage.clickPlaceOrder();
+  //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#7 END************** */

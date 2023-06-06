@@ -251,4 +251,23 @@ export class MenTabPage {
     ).valueOf();
     console.log(wishlist_msg);
   }
+  async clickPantTab() {
+    await this.page.locator("#ui-id-23").click();
+  }
+  async clickPagination() {
+    await this.page.waitForSelector("(//li[@class='item pages-item-next'])[2]");
+    await this.page.locator("(//li[@class='item pages-item-next'])[2]").click();
+  }
+  async clickProductTitle() {
+    await this.page.locator(".product-item-link").nth(1).click();
+  }
+  async selectProductSize2() {
+    await this.page.locator("#option-label-size-143-item-175").click();
+  }
+  async selectProductClr3() {
+    await this.page.locator("#option-label-color-93-item-49").click();
+  }
+  async detailProductText() {
+    await this.page.locator(".product.attribute.description").selectText();
+  }
 }
