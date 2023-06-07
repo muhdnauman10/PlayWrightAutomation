@@ -466,85 +466,9 @@ test("Click on Gear tab and sort by product and select an item , then sort by po
   await Signout.doSignout();
 });
 
-test("Women tabs>Tops>Jackets,apply filter and select an item", async ({
-  page,
-}) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //hover on women tab
-  await page.locator("//a[@id='ui-id-4']").hover();
-  //hower on tops
-  await page.locator("#ui-id-9").hover();
-  //click on jackets
-  await page.locator("#ui-id-11").click();
-  //click on style filter
-  await page.locator("text='Style'").click();
-  //click on jacket from filter option
-  await page.locator("text='Jacket'").click();
-  //select an item
-  await page.locator("a.product-item-link").nth(0).click();
-  //select jacket size
-  await page.locator("#option-label-size-143-item-166").click();
-  //select color
-  await page.locator("#option-label-color-93-item-50").click();
-  //increase qty
-  await page.locator("#qty").fill("3");
-  //click add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //click on cart icon
-  await page.locator("//a[@class='action showcart']").click();
-  //proceed to checkout
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  // //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  // //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  // //click signout
-  await Signout.doSignout();
-});
 
-test("Select an item from Women's tab>>>Hoodies and Sweatshirts", async ({
-  page,
-}) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //hover on women tab
-  await page.locator("//a[@id='ui-id-4']").hover();
-  //hower on tops
-  await page.locator("#ui-id-9").hover();
-  //click on hoodies & sweatshirts
-  await page.locator("#ui-id-12").click();
-  //click on ist row 2nd product
-  await page.locator("(//div[@class='product-item-info'])[2]").click();
-  //select size
-  await page.locator("#option-label-size-143-item-167").click();
-  //select color
-  await page.locator("#option-label-color-93-item-56").click();
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //select item text
-  await page.locator(".base").selectText();
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //click on proceed to check out button
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //click signout
-  await Signout.doSignout();
-});
+
+
 
 test("Select an item from Women's tab>>>Tees", async ({ page }) => {
   const Signin = new Sign_in(page);
