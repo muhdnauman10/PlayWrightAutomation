@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
 const { Sign_in, Sign_out } = require("./sign_in_spec");
 const { WomenTabPage } = require("../utils/support/Women's_Tab_POM");
-const { MenTabPage } = require("../utils/support/Men's_Tab_POM");
+//const { MenTabPage } = require("../utils/support/Men's_Tab_POM");
 
 //********** Test Case#1 START************** */
 test("Women tabs>Tops>Jackets,apply filter and select an item", async ({

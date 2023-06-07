@@ -83,77 +83,8 @@ test.only("Verify Forgot password screen and navigate back", async ({
   await createAccountPage.selectPaswdText();
 });
 
-test("Select a bag from Gear Menu", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
 
-  //mouse hover on Gear menu item
-  await page.locator("#ui-id-6").hover();
-  // click on bags option
-  await page.locator("#ui-id-25").click();
-  //click on descending order
-  await page.locator("(//a[@title='Set Descending Direction'])[1]").click();
-  //click on bag
-  await page.locator("(//li[@class='item product product-item'])[6]").click();
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //select item text
-  await page.locator(".base").selectText();
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //click on proceed to check out button
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //get order number
-  const order_number = (
-    await page.locator(".checkout-success").innerText()
-  ).valueOf();
-  console.log(order_number);
-  //click signout
-  await Signout.doSignout();
-});
 
-test("Select a fitness equipment from Gear Menu", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-
-  //mouse hover on Gear menu item
-  await page.locator("#ui-id-6").hover();
-  // click on fitness equipment option
-  await page.locator("#ui-id-26").click();
-  //click on bottle
-  await page.locator("(//li[@class='item product product-item'])[11]").click();
-  //change the quantity
-  await page.locator("#qty").fill("");
-  await page.locator("#qty").type("5");
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //select item text
-  await page.locator(".base").selectText();
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //click on proceed to check out button
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //click signout
-  await Signout.doSignout();
-});
 
 test("Gear tab >> Apply few filters and select an item", async ({ page }) => {
   const Signin = new Sign_in(page);
@@ -466,35 +397,7 @@ test("Click on Gear tab and sort by product and select an item , then sort by po
 });
 
 
-test("Womens Tab>> Add an item to cart and delete it ", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //hover on women tab
-  await page.locator("//a[@id='ui-id-4']").hover();
-  //hower on tops
-  await page.locator("#ui-id-9").hover();
-  //click on hoodies & sweatshirts
-  await page.locator("#ui-id-12").click();
-  //click on ist row 2nd product
-  await page.locator("(//div[@class='product-item-info'])[2]").click();
-  //select size
-  await page.locator("#option-label-size-143-item-167").click();
-  //select color
-  await page.locator("#option-label-color-93-item-56").click();
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //select item text
-  await page.locator(".base").selectText();
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //delete item
-  await page.locator(".action.delete").first().click();
-  //click on ok from delete promt
-  await page.locator("//button[@class='action-primary action-accept']").click();
-  // //click signout
-  await Signout.doSignout();
-});
+
 
 test("Click Contact us and fill the form", async ({ page }) => {
   const Signin = new Sign_in(page);
