@@ -79,4 +79,16 @@ export class GearTabPage {
   async selectOption1() {
     await this.page.locator("text='Gym'").click();
   }
+  async clickonWatch() {
+    await this.page.locator("#ui-id-27").click();
+  }
+  async clickGItem1() {
+    await this.page
+      .locator("(//li[@class='item product product-item'])[3]")
+      .click();
+  }
+  async selectSuccessMsg() {
+    await this.page.locator(".message-success.success.message").selectText();
+  }
+  
 }
