@@ -90,5 +90,21 @@ export class GearTabPage {
   async selectSuccessMsg() {
     await this.page.locator(".message-success.success.message").selectText();
   }
-  
+  async waitForSorter() {
+    await this.page.waitForSelector("#sorter");
+  }
+  async sortbyPrice() {
+    await this.page.selectOption("#sorter", "price");
+  }
+  async clickGItem2() {
+    await this.page.locator("a.product-item-link").first().click();
+  }
+  async selectProductTitle() {
+    await this.page
+      .locator("//span[@data-ui-id='page-title-wrapper']")
+      .selectText();
+  }
+  async clickAdditionalTitle() {
+    await this.page.locator("#tab-label-additional-title").click();
+  }
 }
