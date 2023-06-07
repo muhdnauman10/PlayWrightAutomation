@@ -166,4 +166,21 @@ export class WomenTabPage {
   async selectItemSize3() {
     await this.page.locator("#option-label-size-143-item-171").click();
   }
+  async clickonWshort() {
+    await this.page.locator("#ui-id-16").click();
+  }
+  async clickWItem5() {
+    await this.page
+      .locator("(//li[@class='item product product-item'])[4]")
+      .click();
+  }
+  async selectItemSize4() {
+    await this.page.locator("#option-label-size-143-item-172").click();
+  }
+  async selectItemClr5() {
+    await this.page.locator("#option-label-color-93-item-52").click();
+  }
+  async clickAddToCompare() {
+    await this.page.locator(".action.tocompare").click();
+  }
 }

@@ -385,7 +385,6 @@ test("Click on Gear tab and sort by price and select an item ", async ({
   await Signout.doSignout();
 });
 
-
 test("Go to “Sale” tab and select on Shorts under Men’s deal from left navigation hyperlink", async ({
   page,
 }) => {
@@ -466,49 +465,6 @@ test("Click on Gear tab and sort by product and select an item , then sort by po
   await Signout.doSignout();
 });
 
-
-
-
-
-
-
-
-test("Select an item from Women's tab>>>bottoms>Pants", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //hover on women tab
-  await page.locator("//a[@id='ui-id-4']").hover();
-  //hower on bottoms
-  await page.locator("#ui-id-10").hover();
-  //click on Pants tab
-  await page.locator("#ui-id-15").click();
-  //click on item
-  await page.locator("(//li[@class='item product product-item'])[10]").click();
-  //select size
-  await page.locator("#option-label-size-143-item-171").click();
-  //select color
-  await page.locator("#option-label-color-93-item-50").click();
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //select item text
-  await page.locator(".base").selectText();
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //click on proceed to check out button
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //click signout
-  await Signout.doSignout();
-});
-
 test("Select an item from Women's tab>>>bottoms>Shorts", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
@@ -574,10 +530,6 @@ test("Womens Tab>> Add an item to cart and delete it ", async ({ page }) => {
   // //click signout
   await Signout.doSignout();
 });
-
-
-
-
 
 test("Click Contact us and fill the form", async ({ page }) => {
   const Signin = new Sign_in(page);

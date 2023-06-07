@@ -227,3 +227,42 @@ test("Select an item from Women's tab>>>bottoms>Pants", async ({ page }) => {
   await Signout.doSignout();
 });
 //********** Test Case#5 END************** */
+
+//********** Test Case#6 START************** */
+test("Select an item from Women's tab>>>bottoms>Shorts", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const womentabpage = new WomenTabPage(page);
+  //hover on women tab
+  await womentabpage.hoveronWomenTab();
+  //hower on bottoms
+  await womentabpage.hoveronWBottom();
+  //click on Shorts tab
+  await womentabpage.clickonWshort();
+  //select an item
+  await womentabpage.clickWItem5();
+  //select size
+  await womentabpage.selectItemSize4();
+  //select color
+  await womentabpage.selectItemClr5();
+  //click on add to cart button
+  await womentabpage.addToCart();
+  //select item text
+  await womentabpage.selectItemText();
+  //click add to compare
+  await womentabpage.clickAddToCompare();
+  //click on cart icon
+  await womentabpage.clickCartIcon();
+  //click on proceed to check out button
+  await womentabpage.clickProceedtoChcout();
+  await womentabpage.waitLoadState();
+  //click on next button
+  await womentabpage.clickNextBtn();
+  //click on place order button
+  await womentabpage.clickPlaceOrder();
+  //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#6 END************** */
