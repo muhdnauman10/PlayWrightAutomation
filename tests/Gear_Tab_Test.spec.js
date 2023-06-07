@@ -146,7 +146,7 @@ test("Select a watch from Gear Menu", async ({ page }) => {
 //********** Test Case#4 END************** */
 
 //********** Test Case#5 START************** */
-test.only("Click on Gear tab and sort by price and select an item ", async ({
+test("Click on Gear tab and sort by price and select an item ", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -178,3 +178,46 @@ test.only("Click on Gear tab and sort by price and select an item ", async ({
 });
 
 //********** Test Case#5 END************** */
+
+//********** Test Case#6 START************** */
+test.only("Click on Gear tab and sort by product and select an item , then sort by position and select item ", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const geartabpage = new GearTabPage(page);
+  await geartabpage.hoveronGearTab();
+  //click on watches
+  await geartabpage.clickonWatch();
+  await geartabpage.waitForSorter();
+  await geartabpage.waitLoadState();
+  await geartabpage.sortbyProductName();
+  // change to List Mode from Grid
+  await geartabpage.listStyle();
+  //click on first item
+  //await page.locator("a.product-item-link").first().click();
+  //increase qty
+  //await page.locator("#qty").fill("4");
+  //click on the Add to cart button
+  await geartabpage.clickAddToCart1();
+  //Sort by Position
+  await geartabpage.waitForSorter();
+  //await page.waitForLoadState("networkidle");
+  await geartabpage.sortbyPosition();
+  //add another item to add to cart
+  await geartabpage.clickAddToCart2();
+  //click on cart icon
+  await geartabpage.clickCartIcon();
+  //proceed to checkout
+  await geartabpage.clickProceedtoChcout();
+  await geartabpage.waitLoadState();
+  //click on next button
+  await geartabpage.clickNextBtn();
+  //click on place order button
+  await geartabpage.clickPlaceOrder();
+  // //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#6 END************** */

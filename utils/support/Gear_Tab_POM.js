@@ -107,4 +107,19 @@ export class GearTabPage {
   async clickAdditionalTitle() {
     await this.page.locator("#tab-label-additional-title").click();
   }
+  async sortbyProductName() {
+    await this.page.selectOption("#sorter", "Product Name");
+  }
+  async listStyle() {
+    await this.page.locator("#mode-list").first().click();
+  }
+  async clickAddToCart1() {
+    await this.page.locator("//button[@title='Add to Cart']").first().click();
+  }
+  async sortbyPosition() {
+    await this.page.selectOption("#sorter", "Position");
+  }
+  async clickAddToCart2() {
+    await this.page.locator("(//button[@title='Add to Cart'])[2]").click();
+  }
 }
