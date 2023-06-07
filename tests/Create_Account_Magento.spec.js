@@ -471,62 +471,7 @@ test("Click on Gear tab and sort by product and select an item , then sort by po
 
 
 
-test("Select an item from Women's tab>>>bra's and tanks", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //hover on women tab
-  await page.locator("//a[@id='ui-id-4']").hover();
-  //hower on tops
-  await page.locator("#ui-id-9").hover();
-  //click on bras & tanks tab
-  await page.locator("#ui-id-14").click();
-  //sort by price
-  await page.waitForSelector("#sorter");
-  await page.selectOption("#sorter", "price");
-  //click on 2nd product from ist row
-  await page.locator("(//li[@class='item product product-item'])[2]").click();
-  //select size
-  await page.locator("#option-label-size-143-item-168").click();
-  //select color
-  await page.locator("#option-label-color-93-item-59").click();
-  //remove qty and add a new qty
-  await page.locator("#qty").fill("");
-  await page.locator("#qty").type("3");
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //click on review tab
-  await page.locator("#tab-label-reviews-title").click();
-  //click on rating start
-  await page.locator("#Rating_3_label").click({ force: true });
-  //fill summary field
-  await page.locator("#summary_field").fill("this is a summary field");
-  //fill review field
-  await page.locator("#review_field").type("product is good");
-  //click submit review button
-  await page.locator(".action.submit.primary").click();
-  //get submit review success noty message
-  const submit_msg = (
-    await page.locator(".message-success.success.message").innerText()
-  ).valueOf();
-  console.log(submit_msg);
-  //select item text
-  await page.locator(".base").selectText();
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //click on proceed to check out button
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //click signout
-  await Signout.doSignout();
-});
+
 
 test("Select an item from Women's tab>>>bottoms>Pants", async ({ page }) => {
   const Signin = new Sign_in(page);

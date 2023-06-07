@@ -191,3 +191,39 @@ test("Select an item from Women's tab>>>bra's and tanks", async ({ page }) => {
 });
 
 //********** Test Case#4 END************** */
+
+//********** Test Case#5 START************** */
+test("Select an item from Women's tab>>>bottoms>Pants", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const womentabpage = new WomenTabPage(page);
+  //hover on women tab
+  await womentabpage.hoveronWomenTab();
+  //hower on bottoms
+  await page.locator("#ui-id-10").hover();
+  //click on Pants tab
+  await womentabpage.clickWPants();
+  //click on item
+  await womentabpage.clickWItem4();
+  //select size
+  await womentabpage.selectItemSize3();
+  //select color
+  await womentabpage.selectItemClr();
+  //click on add to cart button
+  await womentabpage.addToCart();
+  //select item text
+  await womentabpage.selectItemText();
+  //click on cart icon
+  await womentabpage.clickCartIcon();
+  //click on proceed to check out button
+  await womentabpage.clickProceedtoChcout();
+  await womentabpage.waitLoadState();
+  //click on next button
+  await womentabpage.clickNextBtn();
+  //click on place order button
+  await womentabpage.clickPlaceOrder();
+  //click signout
+  await Signout.doSignout();
+});
+//********** Test Case#5 END************** */

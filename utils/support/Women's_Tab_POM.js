@@ -152,4 +152,18 @@ export class WomenTabPage {
   async selectItemClr4() {
     await this.page.locator("#option-label-color-93-item-60").click();
   }
+  async hoveronWBottom() {
+    await this.page.locator("#ui-id-10").hover();
+  }
+  async clickWPants() {
+    await this.page.locator("#ui-id-15").click();
+  }
+  async clickWItem4() {
+    await this.page
+      .locator("(//li[@class='item product product-item'])[10]")
+      .click();
+  }
+  async selectItemSize3() {
+    await this.page.locator("#option-label-size-143-item-171").click();
+  }
 }
