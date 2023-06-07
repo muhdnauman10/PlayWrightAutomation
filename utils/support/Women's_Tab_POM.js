@@ -95,4 +95,61 @@ export class WomenTabPage {
   async selectItemClr2() {
     await this.page.locator("#option-label-color-93-item-53").click();
   }
+  async clickonWTanks() {
+    await this.page.locator("#ui-id-14").click();
+  }
+  async waitForSorter() {
+    await this.page.waitForSelector("#sorter");
+  }
+  async sortbyPrice() {
+    await this.page.selectOption("#sorter", "price");
+  }
+  async clickWItem3() {
+    await this.page
+      .locator("(//li[@class='item product product-item'])[2]")
+      .click();
+  }
+  async selectItemSize2() {
+    await this.page.locator("#option-label-size-143-item-168").click();
+  }
+  async selectItemClr3() {
+    await this.page.locator("#option-label-color-93-item-57").click();
+  }
+  async removeQty() {
+    await this.page.locator("#qty").fill("");
+  }
+  async clickReviewTab() {
+    await this.page.locator("#tab-label-reviews-title").click();
+  }
+  async productRating() {
+    await this.page.locator("#Rating_3_label").click({ force: true });
+  }
+  async waitForSummary() {
+    await this.page.locator("#summary_field").waitFor();
+  }
+  async fillSummary() {
+    await this.page
+      .locator("#summary_field")
+      .fill("Purchase a product and giving review");
+  }
+  async fillReview() {
+    await this.page
+      .locator("#review_field")
+      .fill("this is a test review comment");
+  }
+  async clickSubmitBtn() {
+    await this.page.locator(".action.submit.primary").click();
+  }
+  async submitmsg() {
+    const submit_msg = (
+      await this.page.locator(".message-success.success.message").innerText()
+    ).valueOf();
+    console.log(submit_msg);
+  }
+  async clickExpandable() {
+    await this.page.locator(".block.items-in-cart").click();
+  }
+  async selectItemClr4() {
+    await this.page.locator("#option-label-color-93-item-60").click();
+  }
 }

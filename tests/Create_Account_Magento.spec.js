@@ -470,48 +470,6 @@ test("Click on Gear tab and sort by product and select an item , then sort by po
 
 
 
-test("Select an item from Women's tab>>>Tees", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //hover on women tab
-  await page.locator("//a[@id='ui-id-4']").hover();
-  //hower on tops
-  await page.locator("#ui-id-9").hover();
-  //click on Tees
-  await page.locator("#ui-id-13").click();
-  //click on price tab from left
-  await page.locator("(//div[@class='filter-options-title'])[3]").click();
-  //select price option
-  const priceRangeOption = await page.locator("text=$30.00 - $39.99");
-  await priceRangeOption.click();
-  //change from grid to mode list
-  await page.locator("#mode-list").first().click();
-  //select ist item
-  await page.locator("(//a[@class='product-item-link'])[1]").click();
-  //select size
-  await page.locator("#option-label-size-143-item-166").click();
-  //select color
-  await page.locator("#option-label-color-93-item-53").click();
-  //click on add to cart button
-  await page.locator("#product-addtocart-button").click();
-  //select item text
-  await page.locator(".base").selectText();
-  //click on cart icon
-  await page.locator(".action.showcart").click();
-  //click on proceed to check out button
-  await page.locator("#top-cart-btn-checkout").click();
-  await page.waitForLoadState("networkidle");
-  //click on next button
-  await page.locator("//button[@data-role='opc-continue']").click();
-  //click on place order button
-  const locator = page.locator("//button[@title='Place Order']");
-  await page.waitForSelector("//button[@title='Place Order']");
-  await locator.waitFor();
-  await locator.click();
-  //click signout
-  await Signout.doSignout();
-});
 
 test("Select an item from Women's tab>>>bra's and tanks", async ({ page }) => {
   const Signin = new Sign_in(page);

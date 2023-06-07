@@ -48,7 +48,7 @@ test("Women tabs>Tops>Jackets,apply filter and select an item", async ({
 
 //********** Test Case#2 START************** */
 
-test.only("Select an item from Women's tab>>>Hoodies and Sweatshirts", async ({
+test("Select an item from Women's tab>>>Hoodies and Sweatshirts", async ({
   page,
 }) => {
   const Signin = new Sign_in(page);
@@ -90,7 +90,7 @@ test.only("Select an item from Women's tab>>>Hoodies and Sweatshirts", async ({
 //********** Test Case#2 END************** */
 
 //********** Test Case#3 START************** */
-test("Select an item from Women's tab>>>Tees", async ({ page }) => {
+test.only("Select an item from Women's tab>>>Tees", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -133,3 +133,61 @@ test("Select an item from Women's tab>>>Tees", async ({ page }) => {
 });
 
 //********** Test Case#3 END************** */
+
+//********** Test Case#4 START************** */
+test("Select an item from Women's tab>>>bra's and tanks", async ({ page }) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const womentabpage = new WomenTabPage(page);
+  //hover on women tab
+  await womentabpage.hoveronWomenTab();
+  //hower on tops
+  await womentabpage.hoveronWTop();
+  //click on bras & tanks tab
+  await womentabpage.clickonWTanks();
+  //sort by price
+  await womentabpage.waitForSorter();
+  await womentabpage.sortbyPrice();
+  //click on 2nd product from ist row
+  await womentabpage.clickWItem3();
+  //select size
+  await womentabpage.selectItemSize2();
+  //select color
+  await womentabpage.selectItemClr4();
+  //remove qty and add a new qty
+  await womentabpage.removeQty();
+  await womentabpage.fillQty();
+  //click on add to cart button
+  await womentabpage.addToCart();
+  //click on review tab
+  await womentabpage.clickReviewTab();
+  //click on rating start
+  await womentabpage.productRating();
+  //fill summary field
+  await womentabpage.waitForSummary();
+  await womentabpage.fillSummary();
+  //fill review field
+  await womentabpage.fillReview();
+  //click submit review button
+  await womentabpage.clickSubmitBtn();
+  //get submit review success noty message
+  await womentabpage.submitmsg();
+  //select item text
+  await womentabpage.selectItemText();
+  //click on cart icon
+  await womentabpage.clickCartIcon();
+  //click on proceed to check out button
+  await womentabpage.clickProceedtoChcout();
+  await womentabpage.waitLoadState();
+  //click expandable
+  await womentabpage.clickExpandable();
+  //click on next button
+  await womentabpage.clickNextBtn();
+  //click on place order button
+  await womentabpage.clickPlaceOrder();
+  //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#4 END************** */
