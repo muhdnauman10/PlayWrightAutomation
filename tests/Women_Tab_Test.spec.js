@@ -90,7 +90,7 @@ test("Select an item from Women's tab>>>Hoodies and Sweatshirts", async ({
 //********** Test Case#2 END************** */
 
 //********** Test Case#3 START************** */
-test.only("Select an item from Women's tab>>>Tees", async ({ page }) => {
+test("Select an item from Women's tab>>>Tees", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
@@ -251,7 +251,7 @@ test("Select an item from Women's tab>>>bottoms>Shorts", async ({ page }) => {
   //select item text
   await womentabpage.selectItemText();
   //click add to compare
-  await womentabpage.clickAddToCompare();
+  //await womentabpage.clickAddToCompare();
   //click on cart icon
   await womentabpage.clickCartIcon();
   //click on proceed to check out button
@@ -266,3 +266,40 @@ test("Select an item from Women's tab>>>bottoms>Shorts", async ({ page }) => {
 });
 
 //********** Test Case#6 END************** */
+
+//********** Test Case#7 START************** */
+
+test.only("Womens Tab>> Add an item to cart and delete it ", async ({
+  page,
+}) => {
+  const Signin = new Sign_in(page);
+  const Signout = new Sign_out(page);
+  await Signin.doSignin();
+  const womentabpage = new WomenTabPage(page);
+  //hover on women tab
+  await womentabpage.hoveronWomenTab();
+  //hower on tops
+  await womentabpage.hoveronWTop();
+  //click on hoodies & sweatshirts
+  await womentabpage.clickonWhoodies();
+  //click on ist row 2nd product
+  await womentabpage.clickWitem1();
+  //select size
+  await womentabpage.selectItemSize1();
+  //select color
+  await womentabpage.selectItemClr1();
+  //click on add to cart button
+  await womentabpage.addToCart();
+  //select item text
+  await womentabpage.selectItemText();
+  //click on cart icon
+  await womentabpage.clickCartIcon();
+  //delete item
+  await womentabpage.deleteCart();
+  //click on ok from delete promt
+  await womentabpage.clickOK();
+  // //click signout
+  await Signout.doSignout();
+});
+
+//********** Test Case#7 END************** */

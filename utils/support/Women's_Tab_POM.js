@@ -183,4 +183,12 @@ export class WomenTabPage {
   async clickAddToCompare() {
     await this.page.locator(".action.tocompare").click();
   }
+  async deleteCart() {
+    await this.page.locator(".action.delete").first().click();
+  }
+  async clickOK() {
+    await this.page
+      .locator("//button[@class='action-primary action-accept']")
+      .click();
+  }
 }
