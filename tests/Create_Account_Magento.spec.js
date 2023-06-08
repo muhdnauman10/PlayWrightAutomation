@@ -142,35 +142,7 @@ test("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
   await Signout.doSignout();
 });
 
-test("Search an item using search bar and change page size", async ({
-  page,
-}) => {
-  //goto
-  //await page.goto("https://magento.softwaretestingboard.com/");
 
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-
-  // type the input in search field
-  await page.locator("#search").type("Gym Jacket");
-  // click on search icon(the magnifying glass)
-  await page.locator(".action.search").click();
-  //hover on jacket price
-  await page.locator("#product-price-334").hover();
-  //select jacket size
-  await page.locator("#option-label-size-143-item-170").nth(0).click();
-  //select color
-  await page.locator("#option-label-color-93-item-53").nth(0).click();
-  //click add to cart button
-  await page.locator("xpath=//button[@title='Add to Cart']").nth(0).click();
-  //click on next page via pagination
-  await page.locator("xpath=//a[@title='Next']").nth(1).click();
-  await page.waitForLoadState("networkidle");
-  //change page size
-  await page.locator("#limiter").nth(1).selectOption("24");
-  await Signout.doSignout();
-});
 
 test("Click on Advance search and fill all the criteria", async ({ page }) => {
   const Signin = new Sign_in(page);

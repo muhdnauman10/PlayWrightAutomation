@@ -35,4 +35,28 @@ export class Search {
   async changePageSize() {
     await this.page.locator("#limiter").nth(1).selectOption("24");
   }
+  async clickadvanceSearch() {
+    await this.page.locator("text='Advanced Search'").last().click();
+  }
+  async enterPrice() {
+    await this.page.locator("#price").fill("10");
+  }
+  async enterPriceToField() {
+    await this.page.locator("#price_to").type("2000");
+  }
+  async clickSearchField() {
+    await this.page.locator("(//button[@title='Search'])[2]").click();
+  }
+  async printSearchMsg() {
+    const search_msg = (
+      await this.page.locator("//div[@class='search found']").innerText()
+    ).valueOf();
+    console.log(search_msg);
+  }
+  async enterProductName() {
+    await this.page.locator("#name").type("Jacket");
+  }
+  async enterSKU() {
+    await this.page.locator("#sku").type("Mj");
+  }
 }
