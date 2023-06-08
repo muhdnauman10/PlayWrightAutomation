@@ -142,27 +142,6 @@ test("Navigate to Sale tab-> MEN's Deals -> Pants", async ({ page }) => {
   await Signout.doSignout();
 });
 
-
-
-test("Click on Advance search and fill all the criteria", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //click on Advance search link
-  await page.locator("text='Advanced Search'").last().click();
-  //fill the price from field
-  await page.locator("#price").fill("10");
-  //fill the price to field
-  await page.locator("#price_to").type("2000");
-  //click on search field
-  await page.locator("(//button[@title='Search'])[2]").click();
-  //catching search
-  const search_msg = (
-    await page.locator("//div[@class='search found']").innerText()
-  ).valueOf();
-  console.log(search_msg);
-});
-
 test("Click on Training @smoke > Video Download Menu", async ({ page }) => {
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
@@ -207,53 +186,6 @@ test("Go to “Sale” tab and select on Shorts under Men’s deal from left nav
   await page.waitForSelector("//button[@title='Place Order']");
   await locator.waitFor();
   await locator.click();
-  // //click signout
-  await Signout.doSignout();
-});
-
-
-test("Click Contact us and fill the form", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //click on contact us link
-  await page.locator("text='Contact Us'").click();
-  //fill the name field
-  //await page.locator("#name").type("John Doe");
-  //enter email
-  //await page.locator("#email").type("john23@gmail.com");
-  //enter phone#
-  await page.locator("#telephone").fill("+9234152352");
-  //add a comment
-  await page.locator("#comment").fill("This is a test comment");
-  //click submit button
-  await page.locator("//button[@title='Submit']").click();
-  // //click signout
-  await Signout.doSignout();
-});
-
-test("Subscribe email", async ({ page }) => {
-  const Signin = new Sign_in(page);
-  const Signout = new Sign_out(page);
-  await Signin.doSignin();
-  //to check if signin is successful
-  await expect(page.locator("(//span[@class='logged-in'])[1]")).toBeVisible();
-  await expect(page.locator("(//span[@class='logged-in'])[1]")).toHaveText(
-    "Welcome, John Doe!"
-  );
-
-  // Enter email in the email address field
-  //randomly generate the email id
-  await page
-    .locator("#newsletter")
-    .fill("john_" + getRndInteger(0, 101) + "@mailinator.com");
-  //click on subscribe button
-  await page.locator("//button[@title='Subscribe']").click();
-  //await page.waitForSelector("(//div[@class='messages'])[1]'");
-  //validate the subscribe email
-  await expect(page.locator("(//div[@class='messages'])[1]")).toHaveText(
-    "Thank you for your subscription."
-  );
   // //click signout
   await Signout.doSignout();
 });

@@ -6,9 +6,6 @@ const { Search } = require("../utils/support/Search_POM");
 test("Search an item using search bar and change page size", async ({
   page,
 }) => {
-  //goto
-  //await page.goto("https://magento.softwaretestingboard.com/");
-
   const Signin = new Sign_in(page);
   const Signout = new Sign_out(page);
   await Signin.doSignin();
