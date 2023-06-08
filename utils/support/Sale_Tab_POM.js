@@ -37,14 +37,9 @@ export class Sale {
     await this.page.locator("//button[@data-role='opc-continue']").click();
   }
   async clickPlaceOrder() {
-    // const locator = this.page.locator("//button[@title='Place Order']");
-    // await this.page.waitForSelector("//button[@title='Place Order']");
-    // await locator.waitFor();
-    // await locator.click();
-     await this.page.waitForSelector("//button[@title='Place Order']", {
+    await this.page.waitForSelector("//button[@title='Place Order']", {
       timeout: 30000,
     });
     await this.page.locator("//button[@title='Place Order']").click();
-    
   }
 }
