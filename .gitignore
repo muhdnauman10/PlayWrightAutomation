@@ -4,3 +4,12 @@ node_modules/
 /playwright/.cache/
 /allure-results/
 /allure-report/
+
+
+.vscode
+allure-report
+allure-results
+node_modules
+playwright-report
+tests-examples
+videos
