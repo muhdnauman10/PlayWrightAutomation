@@ -42,7 +42,19 @@ Install Playwright browsers (default is true)
 
 ### Executing Program
 
-Once your automation script is ready , click on terminal in visual studio code and run the below command
+//Once your automation script is ready , click on terminal in visual studio code and run the below command
+
+To run your automation script in Visual Studio Code, follow these steps:
+
+1.Open Visual Studio Code.
+
+2.Open the integrated terminal by navigating to View > Terminal or by using the keyboard shortcut Ctrl+`.
+
+3.In the terminal, ensure that you are in the correct directory where your automation script is located. You can use the cd command to navigate to the project directory if needed.
+
+4.Run the command to execute your automation script. The specific command may vary depending on your project setup and the framework or tool you are using.
+
+5.For running a script using Playwright Test:
 
 ```
 
